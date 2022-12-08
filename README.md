@@ -26,5 +26,5 @@ Mode                 LastWriteTime         Length Name
 查看廖雪峰教程[https://www.liaoxuefeng.com/wiki/896043488029600](https://www.liaoxuefeng.com/wiki/896043488029600)基本拥有上面的基础就可以啦，其它的这个小玩意用的上的时候再看也不迟！！！  
 右上角fork我的项目就是你的项目了，在你的仓库里面啦（分支）。  
 `git clone 你的仓库`    
-在你的仓库上进行修改，需要讨论的时候`pull requests`到主分支，也就是给我一起看看！！！  
+在你的仓库上进行修改，需要讨论的时候`pull requests`到主分支，也就是给我一起看看！！！或者我去克隆你的分支！  
 系统就交给你啦！！！:yum:
