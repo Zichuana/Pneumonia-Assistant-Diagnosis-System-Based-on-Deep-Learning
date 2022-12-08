@@ -10,13 +10,12 @@
 \- FZZD-model
 ```
 `FZZD-model`文件下存放四个模型权重文件，文件过大不要上传github，会很麻烦！！文件名适配路径不要更改。
+权重文件名称如下:  
 ```
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a---           2022/8/17    15:24       85284109 ResNet34_1.pth
--a---           2022/8/19    18:46       85283085 ResNet34_test.pth
--a---           2022/8/26    22:13      608782600 unet_lung_seg.hdf5
--a---           2022/8/24     1:03       54619888 unetmodel.h5
+ ResNet34_1.pth
+ ResNet34_test.pth
+ unet_lung_seg.hdf5
+ unetmodel.h5
 ```
 `FZZDdm`是你更改且需要上传的文件夹
 ### 协作教程
