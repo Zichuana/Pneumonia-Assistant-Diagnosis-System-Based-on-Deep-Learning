@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>COVID-19辅助诊断</title>
+    <!-- Plugin css -->
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="css/flaticon.css" media="all">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="css/animate.css" media="all">
+    <link rel="stylesheet" type="text/css" href="css/swiper.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="css/lightcase.css" media="all">
+    <link rel="stylesheet" type="text/css" href="css/jquery.nstSlider.css" media="all">
+    <link rel="stylesheet" type="text/css" href="css/flexslider.css" media="all">
+
+    <!-- own style css -->
+    <link rel="stylesheet" type="text/css" href="css/style.css" media="all">
+    <link rel="stylesheet" type="text/css" href="css/rtl.css" media="all">
+    <link rel="stylesheet" type="text/css" href="css/responsive.css" media="all">
+
+</head>
+
+<body>
+
+
+    <!-- Start Pre-Loader-->
+    <div id="loading">
+        <div id="loading-center">
+            <div id="loading-center-absolute">
+                <div class="object" id="object_one"></div>
+                <div class="object" id="object_two"></div>
+                <div class="object" id="object_three"></div>
+                <div class="object" id="object_four"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Start Pre-Loader -->
+
+
+    <div class="box-layout">
+
+        <!-- End Pre-Loader -->
+        <header class="header-style-2">
+            <!-- .bg-header-top -->
+            <!-- Start Menu -->
+            <div class="bg-main-menu menu-scroll">
+                <div class="container">
+                    <div class="row">
+                        <div class="main-menu">
+                            <div class="main-menu-bottom">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggler collapsed d-lg-none" data-bs-toggle="collapse" data-bs-target="#bs-example-navbar-collapse-1" aria-controls="bs-example-navbar-collapse-1" aria-expanded="false">
+                                        <span class="navbar-toggler-icon">
+                                            <i class="fa fa-bars"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="main-menu-area">
+                                    <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
+                                        <ul>
+                                            <li>
+                                                <a href="{{ url_for('index') }}" class="active">主页</a>
+                                            </li>
+                                            <li><a href="{{ url_for('predict') }}">分类预测</a></li>
+                                            <li><a href="{{ url_for('segmentation') }}">图像分割</a></li>
+                                            <li><a href="{{ url_for('conversion') }}">图像转换</a></li>
+                                            <li><a href="{{ url_for('user') }}" class="active">用户反馈</a></li>
+<!--                                            <li>-->
+<!--                                                <a href="#">Services</a>-->
+<!--                                            </li>-->
+<!--                                            <li>-->
+<!--                                                <a href="#">pages</a>-->
+<!--                                            </li>-->
+<!--                                            <li>-->
+<!--                                                <a href="#">Events</a>-->
+<!--                                            </li>-->
+<!--                                            <li>-->
+<!--                                                <a href="#">Blog</a>-->
+<!--                                            </li>-->
+<!--                                            <li>-->
+<!--                                                <a href="#">Gallery</a>-->
+<!--                                            </li>-->
+<!--                                            <li><a href="contact.html">contacts</a></li>-->
+                                        </ul>
+                                        <!-- .header-search-box -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+        <!-- Start Slider Section -->
+        <section class="bg-slider-option">
+            <div class="slider-option slider-two">
+                <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" data-bs-interval="10000">
+                            <div class="slider-item">
+                                <img src="images/5.png" alt="bg-slider-2">
+                                <div class="slider-content-area">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-6"></div>
+                                            <div class="col-md-6">
+                                                <div class="slider-content">
+                                                    <h3></h3>
+                                                    <h2>注册登入后跳转至反馈界面</h2>
+                                                    <p>希望能为您带来一些帮助</p>
+                                                    <div class="slider-btn">
+                                                        <a href="{{ url_for('login') }}" class="btn btn-default" style="width: 125px">登录</a>
+                                                        <a href="{{ url_for('register') }}" class="btn btn-default" style="width: 125px">注册</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item" data-bs-interval="2000">
+                            <div class="slider-item">
+                                <img src="images/2.png" alt="bg-slider-2">
+                                <div class="slider-content-area">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-6"></div>
+                                            <div class="col-md-6">
+                                                <div class="slider-content">
+                                                    <h2>请勿将此预测用于自诊断</h2>
+                                                    <p>作为辅助参考</p>
+                                                    <div class="slider-btn">
+                                                        <a href="{{ url_for('login') }}" class="btn btn-default" style="width: 125px">登录</a>
+                                                        <a href="{{ url_for('register') }}" class="btn btn-default"style="width: 125px">注册</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+<!--                        <div class="carousel-item">-->
+<!--                            <div class="slider-item">-->
+<!--                                <img src="images/1.jpg" alt="bg-slider-2">-->
+<!--                                <div class="slider-content-area">-->
+<!--                                    <div class="container">-->
+<!--                                        <div class="row">-->
+<!--                                            <div class="col-md-6"></div>-->
+<!--                                            <div class="col-md-6">-->
+<!--                                                <div class="slider-content">-->
+<!--                                                    <h3>welcome to green forest</h3>-->
+<!--                                                    <h2>save the world</h2>-->
+<!--                                                    <p>By Planting Tree Tomorrow!</p>-->
+<!--                                                    <div class="slider-btn">-->
+<!--                                                        <a href="{{ url_for('login') }}" class="btn btn-default" style="width: 125px">登入</a>-->
+<!--                                                        <a href="{{ url_for('register') }}" class="btn btn-default" style="width: 125px">注册</a>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                    </div>
+                    <button class="left carousel-control carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="right carousel-control carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+        <!-- End Slider Section -->
+
+
+        <!-- Start About Greenforest Section -->
+        <section class="bg-about-greenforest">
+            <div class="container">
+                <div class="row">
+                    <div class="about-greenforest">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="about-greenforest-content">
+                                    <h2>基于深度学习的COVID-19胸部CT辅助诊断系统</h2>
+                                    <p><span>新型冠状病毒（COVID-19）暴发以来，医学影像（如胸部X光片、胸部CT）成为筛查新冠疑似患者的重要工具，但也给影像科医师带来了巨大的压力。深度学习算法能够在发热门诊场景下高效标记疑似病例并提示医师，减少传统临床流程中疑似患者的诊断等待时间，促进疑似病例的及时干预同时减小院内交叉感染风险，所以COVID-19医学影像辅助诊断系统的研究具有非常重要的实际临床应用价值。</span></p>
+                                    <p>项目实现预测单张，多张CT为COVID-19患者的胸片、普通肺炎患者的胸片、正常健康状况下的胸片的概率值，甄别肺结核胸部X光片。基于深度学习的语义分割确定病灶点，绘制热力图。实现医学图像之间转换，便于转换使用PNG进行预测，或分割图像堆叠NII图像，便于3D成像观测。</p>
+                                </div>
+                                <!-- .about-greenforest-content -->
+                            </div>
+                            <!-- .col-lg-8 -->
+                            <div class="col-lg-4">
+                                <div class="about-greenforest-img">
+                                    <img src="images/4.png" alt="about-greenforet-img" class="img-responsive">
+                                </div>
+                                <!-- .about-greenforest-img -->
+                            </div>
+                            <!-- .col-md-4 -->
+                        </div>
+                    </div>
+                    <!-- .about-greenforest -->
+                </div>
+                <!-- .row -->
+            </div>
+            <!-- .container -->
+        </section>
+        <!-- End About Greenforest Section -->
+
+
+        <!-- Start Count Section -->
+        <section class="bg-count2-section">
+            <div class="count-overlay">
+                <div class="container">
+                    <div class="row">
+                        <div class="count-option">
+                            <div class="row">
+                                <div class="col-lg-3 col-sm-6 col-12">
+                                    <div class="count-items">
+                                        <i class="flaticon-internet"></i>
+                                        <span class="counter" data-to="15" data-speed="1500"></span>
+                                        <h4>项目规划</h4>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-6 col-12">
+                                    <div class="count-items">
+                                        <i class="flaticon-man"></i>
+                                        <span class="counter" data-to="7" data-speed="1500"></span>
+                                        <h4>设计人数</h4>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-6 col-12">
+                                    <div class="count-items">
+                                        <i class="flaticon-rocket-launch"></i>
+                                        <span class="counter" data-to="92" data-speed="1500"></span><span>%+</span>
+                                        <h4>模型精确率</h4>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-6 col-12">
+                                    <div class="count-items">
+                                        <i class="flaticon-people"></i>
+                                        <span class="counter" data-to="10" data-speed="1500"></span><span>+</span>
+                                        <h4>注册用户</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Count Section -->
+
+
+
+        <!-- Start Service Style2 Section -->
+        <section class="bg-servicesstyle2-section">
+            <div class="container">
+                <div class="row">
+                    <div class="our-services-option">
+                        <div class="section-header">
+                            <h2>关于我们</h2>
+                            <p>**********暂时隐藏**********</p>
+                        </div>
+                        <!-- .section-header -->
+                        <div class="row">
+                            <div class="col-lg-4 col-sm-6 col-12">
+                                <div class="our-services-box">
+                                    <div class="our-services-items">
+                                        <i class="flaticon-greenhouse"></i>
+                                        <div class="our-services-content">
+                                            <h4><a href="{{ url_for('predict') }}">分类预测</a></h4>
+                                            <p>可对单张、多张CT影像与X光片进行类别预测，具有较高的准确率。</p>
+                                            <a href="{{ url_for('predict') }}">立即试用<i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                                        </div>
+                                        <!-- .our-services-content -->
+                                    </div>
+                                    <!-- .our-services-items -->
+                                </div>
+                                <!-- .our-services-box -->
+                            </div>
+                            <!-- .col-md-4 -->
+                            <div class="col-lg-4 col-sm-6 col-12">
+                                <div class="our-services-box">
+                                    <div class="our-services-items">
+                                        <i class="flaticon-technology"></i>
+                                        <div class="our-services-content">
+                                            <h4><a href="{{ url_for('segmentation') }}">图像分割</a></h4>
+                                            <p>标记单张CT影像病灶点，绘制X光片肺部标记图，绘制单张CT影像热力图，支持下载结果图像。</p>
+                                            <a href="{{ url_for('segmentation') }}">立即试用<i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                                        </div>
+                                        <!-- .our-services-content -->
+                                    </div>
+                                    <!-- .our-services-items -->
+                                </div>
+                                <!-- .our-services-box -->
+                            </div>
+                            <!-- .col-md-4 -->
+                            <div class="col-lg-4 col-sm-6 col-12">
+                                <div class="our-services-box">
+                                    <div class="our-services-items">
+                                        <i class="flaticon-light-bulb"></i>
+                                        <div class="our-services-content">
+                                            <h4><a href="{{ url_for('conversion') }}">图像转换</a></h4>
+                                            <p>借助itk工具将2D与3D医学影像相互转换，能够进行单、多张RBG图像转换为灰度图像</p>
+                                            <a href="{{ url_for('conversion') }}">立即试用<i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                                        </div>
+                                        <!-- .our-services-content -->
+                                    </div>
+                                    <!-- .our-services-items -->
+                                </div>
+                                <!-- .our-services-box -->
+                            </div>
+                            <!-- .col-md-4 -->
+<!--                            <div class="col-lg-4 col-sm-6 col-12">-->
+<!--                                <div class="our-services-box">-->
+<!--                                    <div class="our-services-items">-->
+<!--                                        <i class="flaticon-recycling-symbol"></i>-->
+<!--                                        <div class="our-services-content">-->
+<!--                                            <h4><a href="service_single.html">Recycling</a></h4>-->
+<!--                                            <p>Credibly utcost efective an expertise and web enabled proces that improvements Completely seamless channels </p>-->
+<!--                                            <a href="service_single.html">read more<i class="fa fa-angle-double-right" aria-hidden="true"></i></a>-->
+<!--                                        </div>-->
+<!--                                        &lt;!&ndash; .our-services-content &ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                    &lt;!&ndash; .our-services-items &ndash;&gt;-->
+<!--                                </div>-->
+<!--                                &lt;!&ndash; .our-services-box &ndash;&gt;-->
+<!--                            </div>-->
+                            <!-- .col-md-4 -->
+<!--                            <div class="col-lg-4 col-sm-6 col-12">-->
+<!--                                <div class="our-services-box">-->
+<!--                                    <div class="our-services-items">-->
+<!--                                        <i class="flaticon-sprout"></i>-->
+<!--                                        <div class="our-services-content">-->
+<!--                                            <h4><a href="service_single.html">Saving Forests</a></h4>-->
+<!--                                            <p>Credibly utcost efective an expertise and web enabled proces that improvements Completely seamless channels </p>-->
+<!--                                            <a href="service_single.html">read more<i class="fa fa-angle-double-right" aria-hidden="true"></i></a>-->
+<!--                                        </div>-->
+<!--                                        &lt;!&ndash; .our-services-content &ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                    &lt;!&ndash; .our-services-items &ndash;&gt;-->
+<!--                                </div>-->
+<!--                                &lt;!&ndash; .our-services-box &ndash;&gt;-->
+<!--                            </div>-->
+                            <!-- .col-md-4 -->
+<!--                            <div class="col-lg-4 col-sm-6 col-12">-->
+<!--                                <div class="our-services-box">-->
+<!--                                    <div class="our-services-items">-->
+<!--                                        <i class="flaticon-droplet"></i>-->
+<!--                                        <div class="our-services-content">-->
+<!--                                            <h4><a href="service_single.html">Water Refining</a></h4>-->
+<!--                                            <p>Credibly utcost efective an expertise and web enabled proces that improvements Completely seamless channels </p>-->
+<!--                                            <a href="service_single.html">read more<i class="fa fa-angle-double-right" aria-hidden="true"></i></a>-->
+<!--                                        </div>-->
+<!--                                        &lt;!&ndash; .our-services-content &ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                    &lt;!&ndash; .our-services-items &ndash;&gt;-->
+<!--                                </div>-->
+<!--                                &lt;!&ndash; .our-services-box &ndash;&gt;-->
+<!--                            </div>-->
+                            <!-- .col-md-4 -->
+                        </div>
+                        <!-- .row -->
+                    </div>
+                    <!-- .our-services-option -->
+                </div>
+                <!-- .row -->
+            </div>
+            <!-- .container -->
+        </section>
+        <!-- End Service Style2 Section -->
+
+
+        <!-- Start campaian video Section -->
+        <!-- <section class="bg-compaian-video">
+            <div class="compaian-video-overlay">
+                <div class="container">
+                    <div class="row">
+                        <div class="compaian-video">
+                            <a href="javascript:;" data-rel="lightcase:myCollection"><img src="static/picture/video-icon.png" alt="video-icon"></a>
+                            <h3>WATCH OUR LATEST CAMPAIGN VIDEO</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+        <!-- End campaian video Section -->
+
+
+
+        <!-- Start Sponsors Section -->
+        <section class="bg-sponsors-section">
+            <div class="container">
+                <div class="row">
+                    <div class="sponsors-option">
+                        <div class="section-header">
+                            <h2>Zichuana</h2>
+                            <p>竞赛项目</p>
+                            <p>使用过程中出现的任何问题可以通过用户反馈反馈给我们，同时欢迎有更好提议的您参与反馈</p>
+                            <p>联系邮箱：2092653757@qq.com</p>
+                        </div>
+                    </div>
+                    <!-- .sponsors-option -->
+                </div>
+                <!-- .row -->
+            </div>
+            <!-- .container -->
+        </section>
+        <!-- End Sponsors Section -->
+
+
+        <!-- Start Scrolling -->
+        <div class="scroll-img"><i class="fa fa-angle-up" aria-hidden="true"></i></div>
+        <!-- End Scrolling -->
+
+
+    </div>
+
+
+    <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="js/jquery.waypoints.min.js"></script>
+    <script type="text/javascript" src="js/jquery.counterup.min.js"></script>
+    <script type="text/javascript" src="js/swiper.min.js"></script>
+    <script type="text/javascript" src="js/lightcase.js"></script>
+    <script type="text/javascript" src="js/jquery.nstSlider.js"></script>
+    <script type="text/javascript" src="js/jquery.flexslider.js"></script>
+    <script type="text/javascript" src="js/custom.map.js"></script>
+    <script type="text/javascript" src="js/plugins.isotope.js"></script>
+    <script type="text/javascript" src="js/isotope.pkgd.min.js"></script>
+    <script type="text/javascript" src="js/custom.isotope.js"></script>
+    <script type="text/javascript" src="js/custom.js"></script>
+
+
+
+</body>
+
+</html>
