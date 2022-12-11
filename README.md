@@ -10,7 +10,7 @@
 \- FZZD-model
 ```
 `FZZD-model`文件下存放四个模型权重文件，文件过大不要上传github，会很麻烦！！文件名适配路径不要更改。  
-上传在Google硬盘：[https://drive.google.com/drive/folders/1N_IuJvuHoInu-mGMkpBVbu3Zv9389Isl?usp=share_link](https://drive.google.com/drive/folders/1N_IuJvuHoInu-mGMkpBVbu3Zv9389Isl?usp=share_link)
+上传在Google硬盘：[https://drive.google.com/drive/folders/1N_IuJvuHoInu-mGMkpBVbu3Zv9389Isl?usp=share_link](https://drive.google.com/drive/folders/1N_IuJvuHoInu-mGMkpBVbu3Zv9389Isl?usp=share_link)  
 权重文件名称如下:
 ```
  ResNet34_1.pth
