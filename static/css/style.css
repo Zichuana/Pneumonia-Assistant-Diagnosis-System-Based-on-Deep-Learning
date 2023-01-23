@@ -290,7 +290,7 @@ h2{
 
 h3{
 	font-size: 24px;
-	color: #fff;
+	color: #070707;
 	font-weight: 700;
 }
 h4{
@@ -398,11 +398,11 @@ pre {
 }
  
 pre {
-    border: 1px solid #f0f0f0;
+    /* border: 1px solid #f0f0f0; */
     font-size: 15px;
     font-size: 1rem;
     line-height: 1.3125;
-    margin: 0 0 1.75em;
+    margin: 100px 0 1.75em;
     max-width: 100%;
     overflow: auto;
     padding: 1.75em;
@@ -781,6 +781,30 @@ blockquote:after,
 	padding-bottom: 5px;
 }
 .section-header p{
+	font-size: 16px;
+	font-weight: 400;
+	color: #696969;
+	line-height: 26px;
+}
+
+.section-bottom{
+	max-width: 750px;
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+	padding: 20px 0;
+}
+.section-bottom h3{
+	font-size: 36px;
+	font-weight: 700;
+	color: #53a92c;
+}
+.section-bottom h2{
+	line-height: 48px;
+	text-transform: uppercase;
+	padding-bottom: 5px;
+}
+.section-bottom p{
 	font-size: 16px;
 	font-weight: 400;
 	color: #696969;
@@ -2334,7 +2358,7 @@ section{
 
 .bg-sponsors-section{
 	background: #f7f7f7;
-	padding-bottom: 120px;
+	padding-bottom: 20px;
 }
 .sponsors-option{}
 .sopnsors-items a{
@@ -2737,7 +2761,7 @@ section{
 ====================================================*/
 
 .about-greenforest{
-	padding: 110px 0 75px 0;
+	padding: 20px 0 20px 0;
 }
 .about-greenforest-content h2{
 	text-transform: uppercase;
@@ -6099,7 +6123,19 @@ ul>li>a:focus, ul>li>a:hover {
     width: auto;
 }
 
+/* 页面底部样式 */
+.bottom-section {
+	position: absolute;
+	width: 100%;
+	bottom: 0px;
+}
 
+.bottom-div {
+	text-align: center;
+	height: 20px;
+	line-height: 30px;
+	margin-top: 10px;
+}
 
 
 

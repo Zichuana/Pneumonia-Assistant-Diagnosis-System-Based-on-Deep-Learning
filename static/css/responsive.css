@@ -385,7 +385,7 @@
 	/*============== About themeforest ===============*/
 	
 	.about-greenforest-content {
-		text-align: center;
+		/* text-align: center; */
 	}
 	.about-greenforest-img{
 		display: none;
