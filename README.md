@@ -6,7 +6,7 @@
 ```
 你的某工作文件夹
 |
-|- FZZDdm
+|- Pneumonia-Assistant-Diagnosis-System-Based-on-Deep-Learning
 \- FZZD-model
 ```
 `FZZD-model`文件下存放四个模型权重文件，文件过大不要上传github，会很麻烦！！文件名适配路径不要更改。  
@@ -18,7 +18,7 @@
  unet_lung_seg.hdf5
  unetmodel.h5
 ```
-`FZZDdm`是你更改且需要上传的文件夹
+`Pneumonia-Assistant-Diagnosis-System-Based-on-Deep-Learning`是你更改且需要上传的文件夹
 ### 协作教程
 > 从0开始
 
