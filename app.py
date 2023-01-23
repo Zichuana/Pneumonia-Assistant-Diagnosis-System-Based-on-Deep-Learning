@@ -370,7 +370,7 @@ def get_prediction(image_bytes):
         print(pre)
         # predict_cla = torch.argmax(predict).numpy()
         # print(predict_cla)
-        template = "class:{:<15} probability:{:.3f}"
+        template = "class: {:<15}\tprobability: {:.3f}"
         index_pre = [(class_indict[str(index)], float(p)) for index, p in enumerate(pre)]
         print(index_pre)
         # sort probability
