@@ -21,10 +21,6 @@
     <link rel="stylesheet" type="text/css" href="css/rtl.css" media="all">
     <link rel="stylesheet" type="text/css" href="css/responsive.css" media="all">
 
-    <title>HTML5上传图片并预览</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
-
 </head>
 <style>
     #loading_gif {
@@ -105,23 +101,11 @@
         font-size: 13px;
     }
 
-    /*.gradient{*/
-
-    /*filter:alpha(opacity=100 finishopacity=50 style=1 startx=0,starty=0,finishx=0,finishy=150) progid:DXImageTransform.Microsoft.gradient(startcolorstr=#fff,endcolorstr=#ccc,gradientType=0);*/
-    /*-ms-filter:alpha(opacity=100 finishopacity=50 style=1 startx=0,starty=0,finishx=0,finishy=150) progid:DXImageTransform.Microsoft.gradient(startcolorstr=#fff,endcolorstr=#ccc,gradientType=0);!*IE8*!*/
-    /*background:#1899FF; !* 一些不支持背景渐变的浏览器 *!*/
-    /*background:-moz-linear-gradient(top, #fff, #1899FF);*/
-    /*background:-webkit-gradient(linear, 0 0, 0 bottom, from(#fff), to(#ccc));*/
-    /*background:-o-linear-gradient(top, #fff, #ccc);*/
-    /*}*/
 </style>
 <body>
 <div class="box-layout">
 
-    <!-- End Pre-Loader -->
     <header class="header-style-2">
-        <!-- .bg-header-top -->
-        <!-- Start Menu -->
         <div class="bg-main-menu menu-scroll">
             <div class="container">
                 <div class="row">
@@ -139,31 +123,12 @@
                             <div class="main-menu-area">
                                 <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
                                     <ul>
-                                        <li>
-                                            <a href="{{ url_for('index') }}" class="active">主页</a>
-                                        </li>
+                                        <li><a href="{{ url_for('index') }}">主页</a></li>
                                         <li><a href="{{ url_for('predict') }}">分类预测</a></li>
                                         <li><a href="{{ url_for('segmentation') }}">图像分割</a></li>
-                                        <li><a href="{{ url_for('conversion') }}">图像转换</a></li>
-                                        <li><a href="{{ url_for('user') }}" class="active">用户反馈</a></li>
-                                        <!--                                            <li>-->
-                                        <!--                                                <a href="#">Services</a>-->
-                                        <!--                                            </li>-->
-                                        <!--                                            <li>-->
-                                        <!--                                                <a href="#">pages</a>-->
-                                        <!--                                            </li>-->
-                                        <!--                                            <li>-->
-                                        <!--                                                <a href="#">Events</a>-->
-                                        <!--                                            </li>-->
-                                        <!--                                            <li>-->
-                                        <!--                                                <a href="#">Blog</a>-->
-                                        <!--                                            </li>-->
-                                        <!--                                            <li>-->
-                                        <!--                                                <a href="#">Gallery</a>-->
-                                        <!--                                            </li>-->
-                                        <!--                                            <li><a href="contact.html">contacts</a></li>-->
+                                        <li><a href="{{ url_for('conversion') }}" class="active">图像转换</a></li>
+                                        <li><a href="{{ url_for('user') }}">用户反馈</a></li>
                                     </ul>
-                                    <!-- .header-search-box -->
                                 </div>
                             </div>
                         </div>
@@ -172,6 +137,7 @@
             </div>
         </div>
     </header>
+
     <section class="bg-about-greenforest">
         <div class="container">
             <div class="row">
@@ -179,22 +145,18 @@
                     <div class="row">
                         <div class="col-lg-8">
                             <div class="about-greenforest-content">
-                                <h2></h2>
-                                <p><span></span></p>
+                                <h3>使用指南</h3>
                                 <p>1. 原始图像的大小不同转换时间也有所不同，请勿连续点击造成网页卡死崩溃</p>
                                 <p>2. 选择CT影像存储文件夹</p>
                                 <p></p>
                             </div>
-                            <!-- .about-greenforest-content -->
                         </div>
                     </div>
                 </div>
-                <!-- .about-greenforest -->
             </div>
         </div>
-        <!-- .container -->
     </section>
-    <!--<h3>请选择图片文件：PNG/JPG/JPEG/SVG/GIF</h3>-->
+
     <section>
         <div class="container">
             <div class="row" style="padding-left: 40px">
@@ -212,28 +174,9 @@
             <div>
                 <p id="err" style="padding-left: 40px; padding-top: 10px; color: darkred"></p>
             </div>
-            <!--            <div class="row">-->
-            <!--                 <div class="col-lg-12 col-sm-6 col-12">-->
-            <!--                    <input type="button" id="b0" onclick="test()" value="预测" style="background-color: #10b210;">-->
-            <!--                    <img src="#" id="img1" style="margin-top:20px; width: 60rem; height: 30rem; padding-left: 20px">-->
-            <!--                </div>-->
-            <!--            </div>-->
-            <!--            <div class="row">-->
-            <!--                <div style="float:left;">-->
-            <!--                    <a href="javascript:;" class="file" style="text-align: center; height: 100%; line-height: inherit">选择文件-->
-            <!--                        <input type="file" name="file" id="file0">-->
-            <!--                    </a>-->
-            <!--                    <img src="" id="img0" style="margin-top:20px; width: 35rem; height: 30rem; padding-left: 20px">-->
-            <!--                </div>-->
-            <!--                <div style="float:left;margin-left: 50px;">-->
-            <!--                    <input type="button" id="b0" onclick="test()" value="预测" style="background-color: #10b210">-->
-            <!--                    <img src="" id="img1" style="margin-top:20px; width: 35rem; height: 30rem; padding-left: 20px">-->
-            <!--    &lt;!&ndash;                <pre id="out"></pre>&ndash;&gt;-->
-            <!--    &lt;!&ndash;                <pre id="out" style="width:320px;height:50px;line-height: 50px;margin-top:20px;"></pre>&ndash;&gt;-->
-            <!--                </div>-->
-            <!--            </div>-->
         </div>
     </section>
+
     <section class="bg-about-greenforest">
         <div class="container">
             <div class="row">
@@ -241,36 +184,30 @@
                     <div class="row">
                         <div class="col-lg-8">
                             <div class="about-greenforest-content">
-                                <h2></h2>
-                                <p><span></span></p>
-                                <p>请勿将此预测用于自诊断，仅作为辅助建议工具，你应向你的地方当局咨询关于寻求医疗援助的最新建议。</p>
-                                <p></p>
+                                <p><span style="color: red;">*</span>请勿将此预测用于自诊断，仅作为辅助建议工具，你应向你的地方当局咨询关于寻求医疗援助的最新建议。
+                                </p>
                             </div>
-                            <!-- .about-greenforest-content -->
                         </div>
                     </div>
                 </div>
-                <!-- .about-greenforest -->
             </div>
         </div>
-        <!-- .container -->
     </section>
+
     <section class="bg-sponsors-section">
         <div class="container">
             <div class="row">
-                <div class="sponsors-option">
-                    <div class="section-header">
+                <div class="sponsors-option"">
+                    <!-- <div class=" section-header"> -->
+                    <div class="section-bottom">
                         <h2>Zichuana</h2>
                         <p>竞赛项目</p>
                         <p>使用过程中出现的任何问题可以通过用户反馈反馈给我们，同时欢迎有更好提议的您参与反馈</p>
                         <p>联系邮箱：2092653757@qq.com</p>
                     </div>
                 </div>
-                <!-- .sponsors-option -->
             </div>
-            <!-- .row -->
         </div>
-        <!-- .container -->
     </section>
 </div>
 <div id="loading_gif" style="visibility: hidden">
