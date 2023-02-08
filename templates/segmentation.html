@@ -25,252 +25,182 @@
 
 <body>
 
-
-<!-- Start Pre-Loader-->
-<div id="loading">
-    <div id="loading-center">
-        <div id="loading-center-absolute">
-            <div class="object" id="object_one"></div>
-            <div class="object" id="object_two"></div>
-            <div class="object" id="object_three"></div>
-            <div class="object" id="object_four"></div>
+    <div id="loading">
+        <div id="loading-center">
+            <div id="loading-center-absolute">
+                <div class="object" id="object_one"></div>
+                <div class="object" id="object_two"></div>
+                <div class="object" id="object_three"></div>
+                <div class="object" id="object_four"></div>
+            </div>
         </div>
     </div>
-</div>
-<!-- Start Pre-Loader -->
 
 
-<div class="box-layout">
+    <div class="box-layout">
 
-    <!-- End Pre-Loader -->
-    <header class="header-style-2">
-        <!-- .bg-header-top -->
-        <!-- Start Menu -->
-        <div class="bg-main-menu menu-scroll">
-            <div class="container">
-                <div class="row">
-                    <div class="main-menu">
-                        <div class="main-menu-bottom">
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggler collapsed d-lg-none"
+        <header class="header-style-2">
+            <div class="bg-main-menu menu-scroll">
+                <div class="container">
+                    <div class="row">
+                        <div class="main-menu">
+                            <div class="main-menu-bottom">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggler collapsed d-lg-none"
                                         data-bs-toggle="collapse" data-bs-target="#bs-example-navbar-collapse-1"
                                         aria-controls="bs-example-navbar-collapse-1" aria-expanded="false">
                                         <span class="navbar-toggler-icon">
                                             <i class="fa fa-bars"></i>
                                         </span>
-                                </button>
-                            </div>
-                            <div class="main-menu-area">
-                                <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
-                                    <ul>
-                                        <li>
-                                            <a href="{{ url_for('index') }}" class="active">主页</a>
-                                        </li>
-                                        <li><a href="{{ url_for('predict') }}">分类预测</a></li>
-                                        <li><a href="{{ url_for('segmentation') }}">图像分割</a></li>
-                                        <li><a href="{{ url_for('conversion') }}">图像转换</a></li>
-                                        <li><a href="{{ url_for('user') }}" class="active">用户反馈</a></li>
-                                    </ul>
-                                    <!-- .header-search-box -->
+                                    </button>
+                                </div>
+                                <div class="main-menu-area">
+                                    <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
+                                        <ul>
+                                            <li><a href="{{ url_for('index') }}">主页</a></li>
+                                            <li><a href="{{ url_for('predict') }}">分类预测</a></li>
+                                            <li><a href="{{ url_for('segmentation') }}" class="active">图像分割</a></li>
+                                            <li><a href="{{ url_for('conversion') }}">图像转换</a></li>
+                                            <li><a href="{{ url_for('user') }}">用户反馈</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </header>
+        </header>
 
 
-    <section class="bg-focus-cause-section">
-        <div class="container">
-            <div class="row">
-                <div class="focus-cause">
-                    <div class="section-header">
-                        <h2>功能介绍</h2>
-                        <p>通过U-net网络标记单张CT影像病灶点，X光片肺部标记图，COVID-Net网络绘制单张CT影像热力图，支持下载结果图像。</p>
-                    </div>
-                    <!-- .section-header -->
-                    <div class="row">
-                        <div class="col-lg-4 col-sm-6 col-12">
-                            <div class="cause-items">
-                                <!--                                    <a href="campaign_single.html"><img src="imags/2.png" alt="cause-img-1" class="img-responsive"></a>-->
-                                <div style="text-align: center">
-                                    <img src="images/9.png" alt="cause-img-1" class="img-responsive"
-                                         style="width: 400px; height: 200px">
-                                </div>
-                                <div class="cause-content">
-                                    <div class="price-title">
-                                        <div class="price-left">
-                                            <h5>标记单张CT影像病灶点</h5>
-                                        </div>
-                                        <!-- .price-left -->
-                                        <div class="price-right">
-                                            <h5>准确率<span>71.86%</span></h5>
-                                        </div>
-                                        <!-- .price-left -->
-                                    </div>
-                                    <!-- .price-title -->
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-success progress-bar-striped"
-                                             role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
-                                             style="width:72%">
-                                        </div>
-                                        <!-- .progress-bar -->
-                                    </div>
-                                    <!-- .progress -->
-                                    <!--                                        <h4><a href="campaign_single.html">Sustainable Agriculture</a></h4>-->
-                                    <p>用于标记COVID-19CT影像病灶点，输出图像包括原始图像，预测位点与组合图像。</p>
-                                    <a href="{{ url_for('focalpoint') }}" class="btn btn-default">开始绘制</a>
-                                </div>
-                                <!-- .cause-content -->
-                            </div>
-                            <!-- .cause-items -->
-                        </div>
-                        <div class="col-lg-4 col-sm-6 col-12">
-                            <div class="cause-items">
-                                <!--                                    <a href="campaign_single.html"><img src="imags/2.png" alt="cause-img-1" class="img-responsive"></a>-->
-                                <div style="text-align: center">
-                                    <img src="images/6.png" alt="cause-img-1" class="img-responsive"
-                                         style="width: 400px; height: 200px">
-                                </div>
-                                <div class="cause-content">
-                                    <div class="price-title">
-                                        <div class="price-left">
-                                            <h5>绘制单张CT热力图</h5>
-                                        </div>
-                                        <!-- .price-left -->
-                                        <div class="price-right">
-                                            <h5>引用:<span>COVID-Net</span></h5>
-                                        </div>
-                                        <!-- .price-left -->
-                                    </div>
-                                    <!-- .price-title -->
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-success progress-bar-striped"
-                                             role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
-                                             style="width:50%">
-                                        </div>
-                                        <!-- .progress-bar -->
-                                    </div>
-                                    <!-- .progress -->
-                                    <!--                                        <h4><a href="campaign_single.html">Sustainable Agriculture</a></h4>-->
-                                    <p>借助COVID-Net网络绘制CT影像热力图，结果图片含原始图，热力图，COVID-Net预测结果</p>
-                                    <a href="{{ url_for('heatmap') }}" class="btn btn-default">开始绘制</a>
-                                </div>
-                                <!-- .cause-content -->
-                            </div>
-                            <!-- .cause-items -->
-                        </div>
-                        <!-- .col-md-4 -->
-                        <div class="col-lg-4 col-sm-6 col-12">
-                            <div class="cause-items">
-                                <!--                                    <a href="campaign_single.html"><img src="imags/2.png" alt="cause-img-1" class="img-responsive"></a>-->
-                                <div style="text-align: center">
-                                    <img src="images/7.png" alt="cause-img-1" class="img-responsive"
-                                         style="width: 300px; height: 200px">
-                                </div>
-                                <div class="cause-content">
-                                    <div class="price-title">
-                                        <div class="price-left">
-                                            <h5>绘制单张X光片肺部标记图</h5>
-                                        </div>
-                                        <!-- .price-left -->
-                                        <div class="price-right">
-                                            <h5>准确率:<span>93.86%</span></h5>
-                                        </div>
-                                        <!-- .price-left -->
-                                    </div>
-                                    <!-- .price-title -->
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-success progress-bar-striped"
-                                             role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
-                                             style="width:94%">
-                                        </div>
-                                        <!-- .progress-bar -->
-                                    </div>
-                                    <!-- .progress -->
-                                    <!--                                        <h4><a href="campaign_single.html">Sustainable Agriculture</a></h4>-->
-                                    <p>绘制单张X光片肺部标记图，可用于多通道图像</p>
-                                    <p>&emsp;</p>
-                                    <a href="{{ url_for('segXray') }}" class="btn btn-default">开始绘制</a>
-                                </div>
-                                <!-- .cause-content -->
-                            </div>
-                            <!-- .cause-items -->
-                        </div>
-                    </div>
-                    <!-- .row -->
-                </div>
-                <!-- .focus-cause -->
-            </div>
-            <!-- .row -->
-        </div>
-        <!-- .container -->
-    </section>
-    <!-- End Focus Cause Section -->
-    <!-- End Service Style2 Section -->
-
-
-    <!-- Start campaian video Section -->
-    <!-- <section class="bg-compaian-video">
-        <div class="compaian-video-overlay">
+        <section class="bg-focus-cause-section">
             <div class="container">
                 <div class="row">
-                    <div class="compaian-video">
-                        <a href="javascript:;" data-rel="lightcase:myCollection"><img src="static/picture/video-icon.png" alt="video-icon"></a>
-                        <h3>WATCH OUR LATEST CAMPAIGN VIDEO</h3>
+                    <div class="focus-cause">
+                        <div class="section-header">
+                            <h2>功能介绍</h2>
+                            <p>通过U-net网络标记单张CT影像病灶点，X光片肺部标记图，COVID-Net网络绘制单张CT影像热力图，支持下载结果图像。</p>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-sm-6 col-12">
+                                <div class="cause-items">
+                                    <div style="text-align: center">
+                                        <img src="images/9.png" alt="cause-img-1" class="img-responsive"
+                                            style="width: 400px; height: 200px">
+                                    </div>
+                                    <div class="cause-content">
+                                        <div class="price-title">
+                                            <div class="price-left">
+                                                <h5>标记单张CT影像病灶点</h5>
+                                            </div>
+                                            <div class="price-right">
+                                                <h5>准确率<span>71.86%</span></h5>
+                                            </div>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-success progress-bar-striped"
+                                                role="progressbar" aria-valuenow="40" aria-valuemin="0"
+                                                aria-valuemax="100" style="width:72%">
+                                            </div>
+                                        </div>
+                                        <p>用于标记COVID-19CT影像病灶点，输出图像包括原始图像，预测位点与组合图像。</p>
+                                        <a href="{{ url_for('focalpoint') }}" class="btn btn-default">开始绘制</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6 col-12">
+                                <div class="cause-items">
+                                    <div style="text-align: center">
+                                        <img src="images/6.png" alt="cause-img-1" class="img-responsive"
+                                            style="width: 400px; height: 200px">
+                                    </div>
+                                    <div class="cause-content">
+                                        <div class="price-title">
+                                            <div class="price-left">
+                                                <h5>绘制单张CT热力图</h5>
+                                            </div>
+                                            <div class="price-right">
+                                                <h5>引用:<span>COVID-Net</span></h5>
+                                            </div>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-success progress-bar-striped"
+                                                role="progressbar" aria-valuenow="40" aria-valuemin="0"
+                                                aria-valuemax="100" style="width:50%">
+                                            </div>
+                                        </div>
+                                        <p>借助COVID-Net网络绘制CT影像热力图，结果图片含原始图，热力图，COVID-Net预测结果</p>
+                                        <a href="{{ url_for('heatmap') }}" class="btn btn-default">开始绘制</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6 col-12">
+                                <div class="cause-items">
+                                    <div style="text-align: center">
+                                        <img src="images/7.png" alt="cause-img-1" class="img-responsive"
+                                            style="width: 300px; height: 200px">
+                                    </div>
+                                    <div class="cause-content">
+                                        <div class="price-title">
+                                            <div class="price-left">
+                                                <h5>绘制单张X光片肺部标记图</h5>
+                                            </div>
+                                            <div class="price-right">
+                                                <h5>准确率:<span>93.86%</span></h5>
+                                            </div>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-success progress-bar-striped"
+                                                role="progressbar" aria-valuenow="40" aria-valuemin="0"
+                                                aria-valuemax="100" style="width:94%">
+                                            </div>
+                                        </div>
+                                        <p>绘制单张X光片肺部标记图，可用于多通道图像</p>
+                                        <p>&emsp;</p>
+                                        <a href="{{ url_for('segXray') }}" class="btn btn-default">开始绘制</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section> -->
-    <!-- End campaian video Section -->
+        </section>
 
-
-    <!-- Start Sponsors Section -->
-    <section class="bg-sponsors-section">
-        <div class="container">
-            <div class="row">
-                <div class="sponsors-option">
-                    <div class="section-header">
-                        <h2>Zichuana</h2>
-                        <p>竞赛项目</p>
-                        <p>使用过程中出现的任何问题可以通过用户反馈反馈给我们，同时欢迎有更好提议的您参与反馈</p>
-                        <p>联系邮箱：2092653757@qq.com</p>
+        <section class="bg-sponsors-section">
+            <div class="container">
+                <div class="row">
+                    <div class="sponsors-option">
+                        <div class="section-header">
+                            <h2>Zichuana</h2>
+                            <p>竞赛项目</p>
+                            <p>使用过程中出现的任何问题可以通过用户反馈反馈给我们，同时欢迎有更好提议的您参与反馈</p>
+                            <p>联系邮箱：2092653757@qq.com</p>
+                        </div>
                     </div>
                 </div>
-                <!-- .sponsors-option -->
             </div>
-            <!-- .row -->
-        </div>
-        <!-- .container -->
-    </section>
-    <!-- End Sponsors Section -->
+        </section>
+
+        <div class="scroll-img"><i class="fa fa-angle-up" aria-hidden="true"></i></div>
+
+    </div>
 
 
-    <!-- Start Scrolling -->
-    <div class="scroll-img"><i class="fa fa-angle-up" aria-hidden="true"></i></div>
-    <!-- End Scrolling -->
-
-
-</div>
-
-
-<script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-<script type="text/javascript" src="js/jquery.waypoints.min.js"></script>
-<script type="text/javascript" src="js/jquery.counterup.min.js"></script>
-<script type="text/javascript" src="js/swiper.min.js"></script>
-<script type="text/javascript" src="js/lightcase.js"></script>
-<script type="text/javascript" src="js/jquery.nstSlider.js"></script>
-<script type="text/javascript" src="js/jquery.flexslider.js"></script>
-<script type="text/javascript" src="js/custom.map.js"></script>
-<script type="text/javascript" src="js/plugins.isotope.js"></script>
-<script type="text/javascript" src="js/isotope.pkgd.min.js"></script>
-<script type="text/javascript" src="js/custom.isotope.js"></script>
-<script type="text/javascript" src="js/custom.js"></script>
+    <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="js/jquery.waypoints.min.js"></script>
+    <script type="text/javascript" src="js/jquery.counterup.min.js"></script>
+    <script type="text/javascript" src="js/swiper.min.js"></script>
+    <script type="text/javascript" src="js/lightcase.js"></script>
+    <script type="text/javascript" src="js/jquery.nstSlider.js"></script>
+    <script type="text/javascript" src="js/jquery.flexslider.js"></script>
+    <script type="text/javascript" src="js/custom.map.js"></script>
+    <script type="text/javascript" src="js/plugins.isotope.js"></script>
+    <script type="text/javascript" src="js/isotope.pkgd.min.js"></script>
+    <script type="text/javascript" src="js/custom.isotope.js"></script>
+    <script type="text/javascript" src="js/custom.js"></script>
 
 
 </body>

@@ -101,7 +101,7 @@
         </section>
 
         <section class="bg-about-greenforest">
-            <div class="img-box full">
+            <div class="container img-box full">
                 <section class=" img-section">
                     <div class="z_photo upimg-div clear">
                         <section class="z_file fl">
@@ -110,10 +110,10 @@
                                 accept="image/jpg,image/jpeg,image/png,image/bmp" />
                         </section>
                         <section id="res" style="display: none">
-                            <pre id="out" class="add-img" style="width: 400px; margin-top: 180px;"></pre>
+                            <pre id="out" class="add-img" style="margin-top: 80px;"></pre>
                         </section>
                     </div>
-                    <div style="float:left;margin-left:50px">
+                    <div style="text-align: center;">
                         <input type="button" id="b0" onclick="test()" value="预测">
                     </div>
                 </section>
@@ -176,17 +176,8 @@
     <script type="text/javascript" src="js/custom.js"></script>
     <script type="text/javascript" src="js/imgUp.js"></script>
     <script type="text/javascript">
-        $("#file0").change(function () {
-            var objUrl = getObjectURL(this.files[0]);//获取文件信息
-            console.log("objUrl = " + objUrl);
-            if (objUrl) {
-                $("#img0").attr("src", objUrl);
-            }
-        });
-
         function test() {
             var fileobj = $("#file")[0].files[0];
-            console.log(fileobj);
             if (fileobj === undefined) {
                 alert("请先上传图片");
                 return;
@@ -203,7 +194,6 @@
                 processData: false, // 告诉jquery要传输data对象
                 contentType: false, //告诉jquery不需要增加请求头对于contentType的设置
                 success: function (arg) {
-                    console.log(arg)
                     out = arg.result;
                 }, error: function () {
                     console.log("后台处理错误");
@@ -217,18 +207,6 @@
             document.getElementById("res").style.display = "block";
             document.getElementById("out").innerHTML = flower;
 
-        }
-
-        function getObjectURL(file) {
-            var url = null;
-            if (window.createObjectURL != undefined) {
-                url = window.createObjectURL(file);
-            } else if (window.URL != undefined) { // mozilla(firefox)
-                url = window.URL.createObjectURL(file);
-            } else if (window.webkitURL != undefined) { // webkit or chrome
-                url = window.webkitURL.createObjectURL(file);
-            }
-            return url;
         }
     </script>
 </body>

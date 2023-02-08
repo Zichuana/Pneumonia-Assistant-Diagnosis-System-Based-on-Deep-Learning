@@ -16,7 +16,7 @@ $(function () {
     var numUp = imgContainer.find(".up-section").length;
     var totalNum = numUp + fileList.length; //总的数量
     if (fileList.length > 20 || totalNum > 20) {
-      alert("上传图片数目不可以超过20个，请重新选择"); //一次选择上传超过5个 或者是已经上传和这次上传的到的总数也不可以超过5个
+      alert("上传图片数目不可以超过20个，请重新选择"); //一次选择上传超过20个 或者是已经上传和这次上传的到的总数也不可以超过20
     } else if (numUp < 20) {
       fileList = validateUp(fileList);
       for (var i = 0; i < fileList.length; i++) {
@@ -87,7 +87,7 @@ $(function () {
       var newStr = file.name.split("").reverse().join("");
       if (newStr.split(".")[0] != null) {
         var type = newStr.split(".")[0].split("").reverse().join("");
-        console.log(type + "===type===");
+        // console.log(type + "===type===");
         if (jQuery.inArray(type, defaults.fileType) > -1) {
           // 类型符合，可以上传
           if (file.size >= defaults.fileSize) {
