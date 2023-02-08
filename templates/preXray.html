@@ -176,14 +176,6 @@
     <script type="text/javascript" src="js/custom.js"></script>
     <script type="text/javascript" src="js/imgUp.js"></script>
     <script type="text/javascript">
-        $("#file0").change(function () {
-            var objUrl = getObjectURL(this.files[0]);//获取文件信息
-            console.log("objUrl = " + objUrl);
-            if (objUrl) {
-                $("#img0").attr("src", objUrl);
-            }
-        });
-
         function test() {
             var fileobj = $("#file")[0].files[0];
             console.log(fileobj);

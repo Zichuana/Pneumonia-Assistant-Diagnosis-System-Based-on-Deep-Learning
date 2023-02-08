@@ -210,7 +210,6 @@
 
         function test() {
             var fileobjs = $("#file")[0].files;
-            console.log(fileobjs);
             var form = ''
             var out = '';
             var err = '';
@@ -221,7 +220,6 @@
 
                 form = new FormData();
                 form.append("file", fileobjs[i]);
-                console.log(form.get('file'));
 
                 $.ajax({
                     type: 'POST',
@@ -231,17 +229,13 @@
                     processData: false, // 告诉jquery要传输data对象
                     contentType: false, //告诉jquery不需要增加请求头对于contentType的设置
                     success: function (arg) {
-                        // console.log(arg)
                         out = arg.result;
                         err = arg.err;
-                        console.log(out)
-                        console.log(err)
                     }, error: function () {
                         console.log("后台处理错误");
                     }
                 });
 
-                // console.log(out)
                 flower += '<td>'
                 out.forEach(e => {
                     flower += `<div>${e}</div>`
@@ -254,23 +248,6 @@
                     document.getElementById("res").innerHTML += flower;
                 }
             }
-
-
-            // if(out!==undefined){document.getElementById("img1").src = out;}
-            // if(err!==undefined){document.getElementById("err").innerText = err;}
-
-        }
-
-        function getObjectURL(file) {
-            var url = null;
-            if (window.createObjectURL != undefined) {
-                url = window.createObjectURL(file);
-            } else if (window.URL != undefined) { // mozilla(firefox)
-                url = window.URL.createObjectURL(file);
-            } else if (window.webkitURL != undefined) { // webkit or chrome
-                url = window.webkitURL.createObjectURL(file);
-            }
-            return url;
         }
     </script>
 </body>

@@ -208,7 +208,6 @@
 
         function test() {
             var fileobj = $("#file")[0].files[0];
-            console.log(fileobj);
             var form = new FormData();
             form.append("file", fileobj);
             var out = '';
@@ -222,11 +221,8 @@
                 processData: false, // 告诉jquery要传输data对象
                 contentType: false, //告诉jquery不需要增加请求头对于contentType的设置
                 success: function (arg) {
-                    console.log(arg)
                     out = arg.result;
                     err = arg.err;
-                    console.log(out)
-                    console.log(err)
                 }, error: function () {
                     console.log("后台处理错误");
                 }
@@ -240,7 +236,6 @@
             if (err !== undefined) {
                 document.getElementById("err").innerText = err;
             }
-
         }
     </script>
 </body>

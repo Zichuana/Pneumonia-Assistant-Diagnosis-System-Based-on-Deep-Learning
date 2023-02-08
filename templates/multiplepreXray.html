@@ -251,23 +251,6 @@
                     document.getElementById("res").innerHTML += flower;
                 }
             }
-
-
-            // if(out!==undefined){document.getElementById("img1").src = out;}
-            // if(err!==undefined){document.getElementById("err").innerText = err;}
-
-        }
-
-        function getObjectURL(file) {
-            var url = null;
-            if (window.createObjectURL != undefined) {
-                url = window.createObjectURL(file);
-            } else if (window.URL != undefined) { // mozilla(firefox)
-                url = window.URL.createObjectURL(file);
-            } else if (window.webkitURL != undefined) { // webkit or chrome
-                url = window.webkitURL.createObjectURL(file);
-            }
-            return url;
         }
     </script>
 </body>

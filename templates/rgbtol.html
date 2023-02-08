@@ -210,7 +210,6 @@
 
         function test() {
             var fileobj = $("#file")[0].files[0];
-            console.log(fileobj);
             var form = new FormData();
             form.append("file", fileobj);
             var out = '';
@@ -227,8 +226,6 @@
                     console.log(arg)
                     out = arg.result;
                     err = arg.err;
-                    console.log(out)
-                    console.log(err)
                 }, error: function () {
                     console.log("后台处理错误");
                 }

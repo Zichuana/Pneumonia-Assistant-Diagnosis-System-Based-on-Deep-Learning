@@ -231,16 +231,9 @@
     <script type="text/javascript" src="js/custom.isotope.js"></script>
     <script type="text/javascript" src="js/custom.js"></script>
     <script type="text/javascript">
-        $("#file0").change(function () {
-            var objUrl = getObjectURL(this.files[0]);//获取文件信息
-            alert('文件上传成功！点击开始处理');
-        });
-
-
         function test() {
             document.getElementById('loading_gif').style.visibility = "visible";
             var fileobj = $("#file0")[0].files;
-            // console.log(fileobj);
             var form = new FormData();
             for (let i = 0; i < fileobj.length; i++) {
                 form.append('img' + i, fileobj[i]);
@@ -259,7 +252,6 @@
                 contentType: false, //告诉jquery不需要增加请求头对于contentType的设置
                 success: function (arg) {
                     document.getElementById('loading_gif').style.visibility = "hidden";
-                    console.log(arg)
                     msg = arg.msg;
                     out = arg.result;
                     err = arg.err;
@@ -268,25 +260,10 @@
                     } else {
                         document.getElementById('err').innerText = err;
                     }
-                    // console.log(arg)
-                    // out = arg.result;
                 }, error: function () {
                     console.log("后台处理错误");
                 }
             });
-
-        }
-
-        function getObjectURL(file) {
-            var url = null;
-            if (window.createObjectURL != undefined) {
-                url = window.createObjectURL(file);
-            } else if (window.URL != undefined) { // mozilla(firefox)
-                url = window.URL.createObjectURL(file);
-            } else if (window.webkitURL != undefined) { // webkit or chrome
-                url = window.webkitURL.createObjectURL(file);
-            }
-            return url;
         }
     </script>
 </body>

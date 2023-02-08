@@ -176,17 +176,8 @@
     <script type="text/javascript" src="js/custom.js"></script>
     <script type="text/javascript" src="js/imgUp.js"></script>
     <script type="text/javascript">
-        $("#file").change(function () {
-            var objUrl = getObjectURL(this.files[0]);//获取文件信息
-            console.log("objUrl = " + objUrl);
-            if (objUrl) {
-                $("#img0").attr("src", objUrl);
-            }
-        });
-
         function test() {
             var fileobj = $("#file")[0].files[0];
-            console.log(fileobj);
             if (fileobj === undefined) {
                 alert("请先上传图片");
                 return;
@@ -203,7 +194,6 @@
                 processData: false, // 告诉jquery要传输data对象
                 contentType: false, //告诉jquery不需要增加请求头对于contentType的设置
                 success: function (arg) {
-                    console.log(arg)
                     out = arg.result;
                 }, error: function () {
                     console.log("后台处理错误");
@@ -214,23 +204,9 @@
                 flower += `<div style="border: 0 0 1px 0; border-bottom: 1px solid #CCCCCC; line-height: 60px; font-size:16px;">${e}</div>`
             });
 
-            console.log(flower);
-
             document.getElementById("res").style.display = "block";
             document.getElementById("out").innerHTML = flower;
 
-        }
-
-        function getObjectURL(file) {
-            var url = null;
-            if (window.createObjectURL != undefined) {
-                url = window.createObjectURL(file);
-            } else if (window.URL != undefined) { // mozilla(firefox)
-                url = window.URL.createObjectURL(file);
-            } else if (window.webkitURL != undefined) { // webkit or chrome
-                url = window.webkitURL.createObjectURL(file);
-            }
-            return url;
         }
     </script>
 </body>
