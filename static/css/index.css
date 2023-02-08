@@ -88,19 +88,19 @@
 }
 
 .upimg-div .up-section {
-	width: 380px;
-	height: 360px;
+	width: 280px;
+	height: 260px;
 }
 
 .img-box .upimg-div .z_file {
-	width: 380px;
-	height: 360px;
+	width: 280px;
+	height: 260px;
 }
 
-.z_file .add-img {
+.z_file .add-im {
 	display: block;
-	width: 380px;
-	height: 360px;
+	width: 280px;
+	height: 260px;
 }
 
 /*遮罩层样式*/

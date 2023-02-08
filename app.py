@@ -60,7 +60,7 @@ assert os.path.exists(weights_path), "weights path does not exist..."
 assert os.path.exists(class_json_path), "class json path does not exist..."
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-print(device)
+# print(device)
 model = resnet34(num_classes=3).to(device)
 model.load_state_dict(torch.load(weights_path, map_location=device))
 model_x = resnet34(num_classes=4).to(device)
@@ -114,13 +114,13 @@ def user():
     if request.method == 'POST':
         try:
             id = current_user.get_id()
-            print(id)
+            # print(id)
             user = User.query.filter(User.id == id).all()
             for u in user:
-                print(u.username)
-                print(user)
+                # print(u.username)
+                # print(user)
                 username = u.username
-                print(u)
+                # print(u)
                 mail = u.mail
                 text = request.form.get('text')
                 fk = FK()
@@ -220,7 +220,7 @@ def load_graph(meta_file):
         sess = create_session()
 
         # Load meta file
-        print('Loading meta graph from ' + meta_file)
+        # print('Loading meta graph from ' + meta_file)
         saver = tf.compat.v1.train.import_meta_graph(meta_file, clear_devices=True)
     return graph, sess, saver
 
@@ -229,7 +229,7 @@ def load_ckpt(ckpt, sess, saver):
     """Helper for loading weights"""
     # Load weights
     if ckpt is not None:
-        print('Loading weights from ' + ckpt)
+        # print('Loading weights from ' + ckpt)
         saver.restore(sess, ckpt)
 
 
@@ -361,23 +361,23 @@ def transform_image_x(image_bytes):
 def get_prediction(image_bytes):
     try:
         tensor = transform_image(image_bytes=image_bytes)
-        print(tensor)
+        # print(tensor)
         tensor = torch.unsqueeze(tensor, dim=0)
         # print(tensor)
         output = torch.squeeze(model(tensor.to(device)))
-        print(output)
+        # print(output)
         pre = torch.softmax(output, dim=0)
-        print(pre)
+        # print(pre)
         # predict_cla = torch.argmax(predict).numpy()
         # print(predict_cla)
         template = "class: {:<15}\tprobability: {:.3f}"
         index_pre = [(class_indict[str(index)], float(p)) for index, p in enumerate(pre)]
-        print(index_pre)
+        # print(index_pre)
         # sort probability
         index_pre.sort(key=lambda x: x[1], reverse=True)
-        print(index_pre)
+        # print(index_pre)
         text = [template.format(k, v) for k, v in index_pre]
-        print(text)
+        # print(text)
         return_info = {"result": text}
     except Exception as e:
         return_info = {"result": [str(e)]}
@@ -387,23 +387,23 @@ def get_prediction(image_bytes):
 def get_prediction_x(image_bytes):
     try:
         tensor = transform_image_x(image_bytes=image_bytes)
-        print(tensor)
+        # print(tensor)
         tensor = torch.unsqueeze(tensor, dim=0)
         # print(tensor)
         output = torch.squeeze(model_x(tensor.to(device)))
-        print(output)
+        # print(output)
         pre = torch.softmax(output, dim=0)
-        print(pre)
+        # print(pre)
         # predict_cla = torch.argmax(predict).numpy()
         # print(predict_cla)
-        template = "class:{:<15} probability:{:.3f}"
+        template = "class:{:<15}\tprobability:{:.3f}"
         index_pre = [(class_indict_x[str(index)], float(p)) for index, p in enumerate(pre)]
-        print(index_pre)
+        # print(index_pre)
         # sort probability
         index_pre.sort(key=lambda x: x[1], reverse=True)
-        print(index_pre)
+        # print(index_pre)
         text = [template.format(k, v) for k, v in index_pre]
-        print(text)
+        # print(text)
         return_info = {"result": text}
     except Exception as e:
         return_info = {"result": [str(e)]}
@@ -517,12 +517,12 @@ def heatmap_res():
         # print(image)
         # exit()
         # image = cv2.imdecode(np.frombuffer(img_bytes, np.uint8), cv2.IMREAD_GRAYSCALE)
-        print(image)
+        # print(image)
         # image = cv2.cvtColor(image, cv2.IMREAD_GRAYSCALE)
-        print(image)
+        # print(image)
         image = image.astype(np.float32) / 255.0
         image = np.expand_dims(np.stack((image, image, image), axis=-1), axis=0)
-        print(image)
+        # print(image)
         # Run Grad-CAM
         heatmap, class_pred, class_prob = run_gradcam(
             final_conv, pooled_grads, sess, image)
@@ -584,23 +584,23 @@ def focalpoint_res():
     try:
         path = str(uuid.uuid1()) + '.png'
         image_file = request.files["file"]
-        print("OK")
+        # print("OK")
         img_bytes = image_file.read()
-        print("OK")
+        # print("OK")
         img = cv2.imdecode(np.frombuffer(img_bytes, np.uint8), 1)
-        print(img)
-        print(img.shape)
-        print("OK")
+        # print(img)
+        # print(img.shape)
+        # print("OK")
         img = cv2.resize(img, (512, 512))
-        print("OK")
+        # print("OK")
         img = img / 255
-        print("OK")
-        print(img)
-        print(img.shape)
+        # print("OK")
+        # print(img)
+        # print(img.shape)
         img = img[np.newaxis, :, :, :]
-        print("OK")
+        # print("OK")
         pred = BZDMD.predict(img)
-        print("OK")
+        # print("OK")
         plt.figure(figsize=(12, 6))
         plt.subplot(1, 3, 1)
         plt.imshow(cv2.imdecode(np.frombuffer(img_bytes, np.uint8), 1), cmap='gray')
@@ -641,10 +641,10 @@ def pngtonii_res():
             # files.append(request.files[img])
             img_bytes = request.files[img].read()
             image = Image.open(io.BytesIO(img_bytes))
-            print(image)
+            # print(image)
             img = np.array(image)
             imgs.append(img)
-        print(imgs)
+        # print(imgs)
         imgnii = np.stack(imgs, axis=0)
         nii = sitk.GetImageFromArray(imgnii)
         sitk.WriteImage(nii, './static/data/'+path)
@@ -711,14 +711,14 @@ def rgbtol_res():
         image_file = request.files["file"]
         img_bytes = image_file.read()
         img = cv2.imdecode(np.frombuffer(img_bytes, np.uint8), 1)
-        print(img.shape)
+        # print(img.shape)
         row, col, channel = img.shape
         img_gray = np.zeros((row, col))
         for r in range(row):
             for l in range(col):
                 img_gray[r, l] = 1 / 2 * max(img[r, l, 0], img[r, l, 1], img[r, l, 2]) + 1 / 2 * min(
                     img[r, l, 0], img[r, l, 1], img[r, l, 2])
-        print(img_gray.shape)
+        # print(img_gray.shape)
         cv2.imwrite('./static/data/' + path + image_file.filename, img_gray)
         return_info['result'] = 'data/' + path + image_file.filename
         return_info['msg'] = 'success'
@@ -743,18 +743,18 @@ def muchrgbtol_res():
             # files.append(request.files[img])
             img_bytes = request.files[ig].read()
             img = cv2.imdecode(np.frombuffer(img_bytes, np.uint8), 1)
-            print(img.shape)
+            # print(img.shape)
             row, col, channel = img.shape
             img_gray = np.zeros((row, col))
             for r in range(row):
                 for l in range(col):
                     img_gray[r, l] = 1 / 2 * max(img[r, l, 0], img[r, l, 1], img[r, l, 2]) + 1 / 2 * min(
                         img[r, l, 0], img[r, l, 1], img[r, l, 2])
-            print(img_gray.shape)
+            # print(img_gray.shape)
             if not os.path.exists('./static/data/' + path):
                 os.mkdir('./static/data/' + path)
             cv2.imwrite('./static/data/' + path + '/' + request.files[ig].filename.split('/')[1], img_gray)
-            print("OK")
+            # print("OK")
         zip_files(dir_path, zip_path)
         shutil.rmtree(dir_path)
         return_info['result'] = 'data/' + path + '.zip'

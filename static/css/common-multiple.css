@@ -48,8 +48,8 @@ body {
 	clear: both;
 }
 .full{
-	width: 1210px;
-	min-width: 1210px;
+	/* width: 75%; */
+	/* min-width: 1210px; */
 	margin: 0 auto;
 }
 .full-big{
