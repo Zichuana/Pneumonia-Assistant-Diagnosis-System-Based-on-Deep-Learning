@@ -483,13 +483,15 @@ def heatmap_res():
         image_file = request.files["file"]
         img_bytes = image_file.read()
         path = str(uuid.uuid1())+'.png'
-        image = judgecam(image_bytes=img_bytes)
+        # image = judgecam(image_bytes=img_bytes)
+        # print(image)
         # image = Image.open(io.BytesIO(img_bytes))
         # exit()
-        # image = cv2.imread(io.BytesIO(img_bytes), cv2.IMREAD_GRAYSCALE)
+        # image = cv2.imdecode(io.BytesIO(img_bytes), cv2.IMREAD_GRAYSCALE)
         # exit()
-        # image = cv2.imdecode(np.frombuffer(img_bytes, np.uint8), cv2.IMREAD_GRAYSCALE)
-        # image = cv2.cvtColor(image, cv2.IMREAD_GRAYSCALE)
+        image = cv2.imdecode(np.frombuffer(img_bytes, np.uint8), cv2.IMREAD_GRAYSCALE)
+        # image = cv2.cvtColor(np.asarray(image), cv2.IMREAD_GRAYSCALE)
+        image = cv2.resize(image, (512, 512))
         image = image.astype(np.float32) / 255.0
         image = np.expand_dims(np.stack((image, image, image), axis=-1), axis=0)
         # Run Grad-CAM
@@ -652,33 +654,6 @@ def niitopng_res():
 @app.route("/niitopng", methods=["GET", "POST"])
 def niitopng():
     return render_template("niitopng.html")
-
-
-@app.route("/rgbtol_res", methods=["GET", "POST"])
-def rgbtol_res():
-    return_info = {}
-    try:
-        path = str(uuid.uuid1())
-        image_file = request.files["file"]
-        img_bytes = image_file.read()
-        img = cv2.imdecode(np.frombuffer(img_bytes, np.uint8), 1)
-        row, col, channel = img.shape
-        img_gray = np.zeros((row, col))
-        for r in range(row):
-            for l in range(col):
-                img_gray[r, l] = 1 / 2 * max(img[r, l, 0], img[r, l, 1], img[r, l, 2]) + 1 / 2 * min(
-                    img[r, l, 0], img[r, l, 1], img[r, l, 2])
-        cv2.imwrite('./static/data/' + path + image_file.filename, img_gray)
-        return_info['result'] = 'data/' + path + image_file.filename
-        return_info['msg'] = 'success'
-    except Exception as e:
-        return_info['err'] = str(e)
-    return return_info
-
-
-@app.route("/rgbtol", methods=["GET", "POST"])
-def rgbtol():
-    return render_template("rgbtol.html")
 
 
 @app.route("/muchrgbtol_res", methods=["GET", "POST"])
