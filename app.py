@@ -555,18 +555,19 @@ def focalpoint_res():
         img_bytes = image_file.read()
         img = cv2.imdecode(np.frombuffer(img_bytes, np.uint8), 1)
         img = cv2.resize(img, (512, 512))
+        image = img
         img = img / 255
         img = img[np.newaxis, :, :, :]
         pred = BZDMD.predict(img)
         plt.figure(figsize=(12, 6))
         plt.subplot(1, 3, 1)
-        plt.imshow(cv2.imdecode(np.frombuffer(img_bytes, np.uint8), 1), cmap='gray')
+        plt.imshow(image, cmap='gray')
         plt.title('Original Image')
         plt.subplot(1, 3, 2)
         plt.imshow(np.squeeze(pred) > .5, cmap='gray')
         plt.title('Prediction')
         plt.subplot(1, 3, 3)
-        plt.imshow(cv2.imdecode(np.frombuffer(img_bytes, np.uint8), 1), cmap='gray',
+        plt.imshow(image, cmap='gray',
                    interpolation='none')
         plt.imshow(np.squeeze(pred) > .5, cmap='Spectral_r', alpha=0.5)
         plt.title('Actual')
