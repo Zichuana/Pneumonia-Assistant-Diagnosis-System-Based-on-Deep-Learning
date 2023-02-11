@@ -108,7 +108,6 @@ login_manager.login_message = 'Access denied.'
 login_manager.init_app(app)  # 初始化应用
 
 
-# 6、访问控制
 @app.route('/user', methods=["POST", "GET"])
 @login_required
 def user():
@@ -130,6 +129,29 @@ def user():
         except Exception as e:
             return render_template('user.html', msg='提交失败！-'+str(e))
     return render_template('user.html')
+
+
+@app.route('/feedback', methods=["POST", "GET"])
+@login_required
+def feedback():
+    if request.method == 'POST':
+        try:
+            id = current_user.get_id()
+            user = User.query.filter(User.id == id).all()
+            for u in user:
+                username = u.username
+                mail = u.mail
+                text = request.form.get('text')
+                fk = FK()
+                fk.username = username
+                fk.mail = mail
+                fk.text = text
+                db.session.add(fk)
+                db.session.commit()
+                return render_template('feedback.html', msg='提交成功！')
+        except Exception as e:
+            return render_template('feedback.html', msg='提交失败！-'+str(e))
+    return render_template('feedback.html')
 
 
 # 3、加载用户, login_required 需要查询用户信息
@@ -429,11 +451,13 @@ def root():
 
 
 @app.route("/predict", methods=["GET", "POST"])
+@login_required
 def predict():
     return render_template("predict.html")
 
 
 @app.route("/result", methods=["GET", "POST"])
+@login_required
 @torch.no_grad()
 def result():
     image = request.files["file"]
@@ -443,11 +467,13 @@ def result():
 
 
 @app.route("/preCT", methods=["GET", "POST"])
+@login_required
 def preCT():
     return render_template("preCT.html")
 
 
 @app.route("/resultXray", methods=["GET", "POST"])
+@login_required
 @torch.no_grad()
 def resultXray():
     image = request.files["file"]
@@ -457,26 +483,31 @@ def resultXray():
 
 
 @app.route("/preXray", methods=["GET", "POST"])
+@login_required
 def preXray():
     return render_template("preXray.html")
 
 
 @app.route("/multiplepreCT", methods=["GET", "POST"])
+@login_required
 def multiplepreCT():
     return render_template("multiplepreCT.html")
 
 
 @app.route("/multiplepreXray", methods=["GET", "POST"])
+@login_required
 def multiplepreXray():
     return render_template("multiplepreXray.html")
 
 
 @app.route("/segmentation", methods=['GET', 'POST'])
+@login_required
 def segmentation():
     return render_template('segmentation.html')
 
 
 @app.route("/heatmap_res", methods=["GET", "POST"])
+@login_required
 def heatmap_res():
     return_info = {}
     try:
@@ -511,11 +542,13 @@ def heatmap_res():
 
 
 @app.route("/heatmap", methods=["GET", "POST"])
+@login_required
 def heatmap():
     return render_template("heatmap.html")
 
 
 @app.route("/segXray_res", methods=["GET", "POST"])
+@login_required
 def segXray_res():
     return_info = {}
     try:
@@ -544,11 +577,13 @@ def segXray_res():
 
 
 @app.route("/segXray", methods=["GET", "POST"])
+@login_required
 def segXray():
     return render_template("segXray.html")
 
 
 @app.route("/focalpoint_res", methods=["GET", "POST"])
+@login_required
 def focalpoint_res():
     return_info = {}
     try:
@@ -582,16 +617,19 @@ def focalpoint_res():
 
 
 @app.route("/focalpoint", methods=["GET", "POST"])
+@login_required
 def focalpoint():
     return render_template("focalpoint.html")
 
 
 @app.route("/conversion", methods=["GET", "POST"])
+@login_required
 def conversion():
     return render_template("conversion.html")
 
 
 @app.route("/pngtonii_res", methods=["GET", "POST"])
+@login_required
 def pngtonii_res():
     return_info = {}
     try:
@@ -614,11 +652,13 @@ def pngtonii_res():
 
 
 @app.route("/pngtonii", methods=["GET", "POST"])
+@login_required
 def pngtonii():
     return render_template("pngtonii.html")
 
 
 @app.route("/niitopng_res", methods=["GET", "POST"])
+@login_required
 def niitopng_res():
     return_info = {}
     try:
@@ -652,11 +692,13 @@ def niitopng_res():
 
 
 @app.route("/niitopng", methods=["GET", "POST"])
+@login_required
 def niitopng():
     return render_template("niitopng.html")
 
 
 @app.route("/muchrgbtol_res", methods=["GET", "POST"])
+@login_required
 def muchrgbtol_res():
     return_info = {}
     try:
@@ -686,6 +728,7 @@ def muchrgbtol_res():
 
 
 @app.route("/muchrgbtol", methods=["GET", "POST"])
+@login_required
 def muchrgbtol():
     return render_template("muchrgbtol.html")
 

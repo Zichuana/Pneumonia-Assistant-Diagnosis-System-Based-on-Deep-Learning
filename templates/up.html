@@ -56,13 +56,12 @@
                                 <div class="main-menu-area">
                                     <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
                                         <ul>
-                                            <li>
-                                                <a href="{{ url_for('index') }}" class="active">主页</a>
-                                            </li>
+                                            <li><a href="{{ url_for('index') }}" class="active">主页</a></li>
                                             <li><a href="{{ url_for('predict') }}">分类预测</a></li>
                                             <li><a href="{{ url_for('segmentation') }}">图像分割</a></li>
                                             <li><a href="{{ url_for('conversion') }}">图像转换</a></li>
-                                            <li><a href="{{ url_for('user') }}" class="active">用户反馈</a></li>
+                                            <li><a href="{{ url_for('feedback') }}">用户反馈</a></li>
+                                            <li><a href="{{ url_for('user') }}">用户中心</a></li>
                                         </ul>
                                     </div>
                                 </div>
