@@ -28,8 +28,11 @@
                         LOGIN
                     </span>
                 </div>
-
+                <form method="get" action="/register"  style="text-align:right">
+                        <button type="submit"><&nbsp还没有账户？立即注册&nbsp>&nbsp</button>
+                </form>
                 <form class="login100-form validate-form" method="post" action="{{ url_for('login') }}">
+
                     <div class="wrap-input100 validate-input m-b-26" data-validate="用户名必填">
                         <span class="label-input100">用户名</span>
                         <input class="input100" type="text" name="username" autocomplete="off">
