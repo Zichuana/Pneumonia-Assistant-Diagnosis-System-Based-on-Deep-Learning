@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="css/lightcase.css" media="all">
     <link rel="stylesheet" type="text/css" href="css/jquery.nstSlider.css" media="all">
     <link rel="stylesheet" type="text/css" href="css/flexslider.css" media="all">
+    <link rel="stylesheet" type="text/css" href="css/mermaid.min.css" media="all" >
 
     <!-- own style css -->
     <link rel="stylesheet" type="text/css" href="css/style.css" media="all">
@@ -99,24 +100,21 @@
 
         <section class="bg-servicesstyle2-section">
             <div class="container">
-                <form method="post" action="{{ url_for('user') }}">
-                    <div>
-                        <h4 style="color: #96989a;">感谢您留下珍贵的反馈与建议</h4>
+                <div class="row" style="padding-left: 40px">
+                    <div class="col-lg-12 col-sm-2 col-12">
+                        <div id="table"></div>
                     </div>
-                    <textarea class="test3" type="text" contenteditable="true" name="text"></textarea>
-                    <div style="padding-top: 10px">
-                        <button class="btn btn-default">&nbsp;提&nbsp;&nbsp;&nbsp;&nbsp;交&nbsp;</button>
-                        <p>{{msg}}</p>
+                    <div class="col-lg-4 col-sm-1 col-12">
                     </div>
-                </form>
+                </div>
             </div>
         </section>
 
         <section class="bg-sponsors-section">
             <div class="container">
                 <div class="row">
-                    <div class="sponsors-option"">
-                    <!-- <div class=" section-header"> -->
+                    <div class="sponsors-option">
+                        <!-- <div class=" section-header"> -->
                         <div class="section-bottom">
                             <h2>Zichuana</h2>
                             <p>竞赛项目</p>
@@ -142,6 +140,31 @@
     <script type="text/javascript" src="js/isotope.pkgd.min.js"></script>
     <script type="text/javascript" src="js/custom.isotope.js"></script>
     <script type="text/javascript" src="js/custom.js"></script>
+    <script type="text/javascript" src="js/gridjs.umd.js"></script>
 </body>
+<script type="text/javascript">
+    test();
+
+    function test() {
+        $.ajax({
+            type: 'POST',
+            url: "userLogInfo",
+            // data: [],
+            async: true,       //同步执行
+            processData: false, // 告诉jquery要传输data对象
+            contentType: false, //告诉jquery不需要增加请求头对于contentType的设置
+            success: function (arg) {
+                // console.log(arg)
+                new gridjs.Grid({
+                    pagination: true,
+                    columns: ['useType', 'userInput', 'resType', 'dateTime'],
+                    data: arg.result
+                }).render(document.getElementById("table"));
+            }, error: function () {
+                console.log("后台处理错误");
+            }
+        });
+    }
+</script>
 
 </html>

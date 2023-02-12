@@ -4,6 +4,7 @@ import hashlib
 from extension import db
 from werkzeug.security import check_password_hash,  generate_password_hash
 import hashlib
+from sqlalchemy.sql import func
 from flask_login import UserMixin
 
 
@@ -41,9 +42,24 @@ class User(db.Model, UserMixin):
                 return user
 
 
-class FK(db.Model):
+class FadeBack(db.Model):
     __tablename__ = 'feedback'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(255), nullable=False)
     mail = db.Column(db.String(255), nullable=False)
     text = db.Column(db.Text, nullable=False)
+
+
+class UserLog(db.Model):
+    __tablename__ = 'userlog'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    userId = db.Column(db.Integer, nullable=False)
+    username = db.Column(db.String(255), nullable=False)
+    router = db.Column(db.String(255), nullable=False)
+    dateTime = db.Column(db.DateTime(timezone=True), default=func.now())
+    userInput = db.Column(db.String(255), nullable=False)
+    resType = db.Column(db.String(255), nullable=False)
+    result = db.Column(db.String(255), nullable=False)
+
+    # 非数据库字段
+    useType = ''

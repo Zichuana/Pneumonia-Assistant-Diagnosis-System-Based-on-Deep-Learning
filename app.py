@@ -4,6 +4,7 @@ import json
 import hashlib
 import cv2
 import uuid
+import datetime
 from dataclasses import dataclass
 
 from matplotlib import pyplot as plt
@@ -14,7 +15,7 @@ from PIL import Image
 from flask import Flask, jsonify, request, render_template, session, g, redirect, url_for
 from flask_cors import CORS
 from model import resnet34
-from models import User, FK
+from models import User, FadeBack, UserLog
 from extension import db
 import tensorflow as tf
 import numpy as np
@@ -23,7 +24,7 @@ from flask_login import UserMixin, LoginManager, login_required, logout_user, lo
 from keras.utils import load_img
 import keras.models
 from keras.utils import image_utils
-from werkzeug.security import check_password_hash,  generate_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
 
 from datetime import timedelta
 import SimpleITK as sitk
@@ -32,13 +33,13 @@ import shutil
 import imageio
 import zipfile
 import matplotlib
-matplotlib.use('Agg')
 
+matplotlib.use('Agg')
 
 app = Flask(__name__, static_url_path="/")
 
 CORS(app)  # 解决跨域问题
-basedir = os.path.abspath(os.path.dirname(__file__)) # 使用绝对路径
+basedir = os.path.abspath(os.path.dirname(__file__))  # 使用绝对路径
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'users.sqlite')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
@@ -51,7 +52,6 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = timedelta(seconds=1)
 
 app.secret_key = 'secret_key'  # 设置表单交互密钥
-
 
 weights_path = "../FZZD-model/ResNet34_1.pth"
 weights_x_path = "../FZZD-model/ResNet34_test.pth"
@@ -93,8 +93,9 @@ unet.summary()
 dice_coef_loss = -0.8332
 iou = 0.7186
 dice_coef = 0.8332
-BZDMD = keras.models.load_model('../FZZD-model/unet_lung_seg.hdf5', custom_objects={'dice_coef_loss': dice_coef_loss, 'iou': iou
-    , 'dice_coef': dice_coef})
+BZDMD = keras.models.load_model('../FZZD-model/unet_lung_seg.hdf5',
+                                custom_objects={'dice_coef_loss': dice_coef_loss, 'iou': iou
+                                    , 'dice_coef': dice_coef})
 BZDMD.summary()
 
 # 1、实例化登录管理对象
@@ -119,7 +120,7 @@ def user():
                 username = u.username
                 mail = u.mail
                 text = request.form.get('text')
-                fk = FK()
+                fk = FadeBack()
                 fk.username = username
                 fk.mail = mail
                 fk.text = text
@@ -127,7 +128,7 @@ def user():
                 db.session.commit()
                 return render_template('user.html', msg='提交成功！')
         except Exception as e:
-            return render_template('user.html', msg='提交失败！-'+str(e))
+            return render_template('user.html', msg='提交失败！-' + str(e))
     return render_template('user.html')
 
 
@@ -142,7 +143,7 @@ def feedback():
                 username = u.username
                 mail = u.mail
                 text = request.form.get('text')
-                fk = FK()
+                fk = FadeBack()
                 fk.username = username
                 fk.mail = mail
                 fk.text = text
@@ -150,8 +151,39 @@ def feedback():
                 db.session.commit()
                 return render_template('feedback.html', msg='提交成功！')
         except Exception as e:
-            return render_template('feedback.html', msg='提交失败！-'+str(e))
+            return render_template('feedback.html', msg='提交失败！-' + str(e))
     return render_template('feedback.html')
+
+
+@app.route('/userLogInfo', methods=["POST", "GET"])
+@login_required
+def userLogInfo():
+    info = {}
+    lists = []
+    res = {}
+
+    routers = {'resultCT': 'CT影像类别预测', 'resultXray': 'X光片类别预测',
+                   'focalpoint_res': '标记CT影像病灶点', 'heatmap_res': '绘制CT热力图',
+                   'segXray_res': '绘制X光片肺部标记图', 'pngtonii_res': 'png堆叠转换nii文件',
+                   'niitopng_res': 'nii文件转化为png格式'}
+    try:
+        if request.method == 'POST':
+            id = current_user.get_id()
+            userlogs = UserLog.query.filter(UserLog.userId == id).all()
+            for userlog in userlogs:
+                # res['userName'] = userlog.username
+                res['useType'] = routers[userlog.router]
+                res['userInput'] = userlog.userInput
+                res['resType'] = userlog.resType
+                res['result'] = userlog.result
+                res['dateTime'] = userlog.dateTime
+                lists.append(res)
+            info['result'] = lists
+            info['msg'] = 'success'
+    except Exception as e:
+        info['err'] = str(e)
+    return jsonify(info)
+
 
 
 # 3、加载用户, login_required 需要查询用户信息
@@ -195,7 +227,7 @@ def register():
     return render_template('register.html')
 
 
-@app.route("/login",  methods=['GET', 'POST'])
+@app.route("/login", methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.form.get('username')
@@ -209,7 +241,7 @@ def login():
             # 此时的u表示的就是用户对象
             if u.password == new_password:
                 login_user(u)
-                return redirect(url_for('user'))
+                return redirect(url_for('index'))
         else:
             return render_template('login.html', msg='用户名或者密码有误！')
 
@@ -439,15 +471,46 @@ def create():
     db.create_all()
     User.init_db()
 
+def saveImage(image):
+    """
+    保存前端用户上传的图片
+    """
+    # 获取当前时间戳
+    nowTime = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
+    path = 'static/data/' + nowTime + '.jpg'
+    with open(path, 'wb') as f:
+        f.write(image)
+    f.close()
+    return 'data/' + nowTime + '.jpg'
+
+
+def saveUserLog(router, resType, userInput, output):
+    # try:
+    userId = current_user.get_id()
+    user = User.query.filter(User.id == userId).all()
+    userlog = UserLog()
+    userlog.userId = userId
+    userlog.username = user[0].username
+    userlog.router = router
+    userlog.resType = resType
+    userlog.userInput = userInput
+    userlog.result = output
+    db.session.add(userlog)
+    db.session.commit()
+    # except Exception as e:
+    #     print(e)
+    #     return str(e)
+    return True
+
 
 @app.route("/index", methods=["GET", "POST"])
 def index():
-    return render_template("up.html")
+    return render_template("index.html")
 
 
 @app.route("/", methods=["GET", "POST"])
 def root():
-    return render_template("up.html")
+    return render_template("index.html")
 
 
 @app.route("/predict", methods=["GET", "POST"])
@@ -456,13 +519,17 @@ def predict():
     return render_template("predict.html")
 
 
-@app.route("/result", methods=["GET", "POST"])
+@app.route("/resultCT", methods=["GET", "POST"])
 @login_required
 @torch.no_grad()
 def result():
     image = request.files["file"]
     img_bytes = image.read()
+    savePath = saveImage(img_bytes)
+
     info = get_prediction(image_bytes=img_bytes)
+
+    saveUserLog('resultCT', 'text', savePath, str(info['result']))
     return jsonify(info)  # json格式传至前端
 
 
@@ -478,7 +545,10 @@ def preCT():
 def resultXray():
     image = request.files["file"]
     img_bytes = image.read()
+    savePath = saveImage(img_bytes)
+
     info = get_prediction_x(image_bytes=img_bytes)
+    saveUserLog('resultXray', 'text', savePath, str(info['result']))
     return jsonify(info)  # json格式传至前端
 
 
@@ -511,9 +581,10 @@ def segmentation():
 def heatmap_res():
     return_info = {}
     try:
+        outputPath = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f') + '.png'
         image_file = request.files["file"]
         img_bytes = image_file.read()
-        path = str(uuid.uuid1())+'.png'
+        savePath = saveImage(img_bytes)
         # image = judgecam(image_bytes=img_bytes)
         # image = Image.open(io.BytesIO(img_bytes))
         # image = cv2.imdecode(io.BytesIO(img_bytes), cv2.IMREAD_GRAYSCALE)
@@ -528,11 +599,14 @@ def heatmap_res():
         fig, ax = plt.subplots(1, 2, figsize=(10, 5))
         plt.subplots_adjust(hspace=0.01)
         ax[0].imshow(image[0])
-        plt.suptitle('Predicted Class: {} ({:.3f} confidence)\n'.format(CLASS_NAMES[class_pred], class_prob,))
+        plt.suptitle('Predicted Class: {} ({:.3f} confidence)\n'.format(CLASS_NAMES[class_pred], class_prob, ))
         ax[1].imshow(image[0])
         ax[1].imshow(heatmap, cmap='jet', alpha=0.4)
-        plt.savefig("./static/data/"+path, dpi=200)
-        return_info["result"] = 'data/' + path
+        plt.savefig("./static/data/" + outputPath, dpi=200)
+        return_info["result"] = 'data/' + outputPath
+
+        # 保存用户操作日志到数据库
+        saveUserLog('heatmap_res', 'image', savePath, str(return_info['result']))
     except Exception as e:
         return_info['err'] = str(e)
     return return_info
@@ -549,11 +623,13 @@ def heatmap():
 def segXray_res():
     return_info = {}
     try:
-        path = str(uuid.uuid1()) + '.png'
+        outputPath = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f') + '.png'
         images = []
         IMAGE_SIZE = 256
         image_file = request.files["file"]
         img_bytes = image_file.read()
+        savePath = saveImage(img_bytes)
+
         image = Image.open(io.BytesIO(img_bytes))
         image = image.resize((IMAGE_SIZE, IMAGE_SIZE), Image.NEAREST)
         image = image_utils.img_to_array(image)
@@ -567,9 +643,12 @@ def segXray_res():
         plt.subplot(1, 2, 2)
         plt.imshow(image[0], cmap='gray', interpolation='none')
         plt.imshow(pred[0], cmap='Spectral_r', alpha=0.3)
-        plt.savefig("./static/data/"+path, dpi=200)
+        plt.savefig("./static/data/" + outputPath, dpi=200)
         plt.close()
-        return_info["result"] = 'data/' + path
+        return_info["result"] = 'data/' + outputPath
+
+        # 保存用户操作日志到数据库
+        saveUserLog('segXray_res', 'image', savePath, str(return_info['result']))
     except Exception as e:
         return_info['err'] = str(e)
     return return_info
@@ -586,9 +665,11 @@ def segXray():
 def focalpoint_res():
     return_info = {}
     try:
-        path = str(uuid.uuid1()) + '.png'
+        outputPath = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f') + '.png'
         image_file = request.files["file"]
         img_bytes = image_file.read()
+        savePath = saveImage(img_bytes)
+
         img = cv2.imdecode(np.frombuffer(img_bytes, np.uint8), 1)
         img = cv2.resize(img, (512, 512))
         image = img
@@ -607,9 +688,12 @@ def focalpoint_res():
                    interpolation='none')
         plt.imshow(np.squeeze(pred) > .5, cmap='Spectral_r', alpha=0.5)
         plt.title('Actual')
-        plt.savefig("./static/data/" + path, dpi=300)
+        plt.savefig("static/data/" + outputPath, dpi=300)
         plt.close()
-        return_info["result"] = 'data/' + path
+        return_info["result"] = 'data/' + outputPath
+
+        # 保存用户操作日志到数据库
+        saveUserLog('focalpoint_res', 'image', savePath, str(return_info['result']))
     except Exception as e:
         return_info['err'] = str(e)
     return return_info
@@ -632,19 +716,35 @@ def conversion():
 def pngtonii_res():
     return_info = {}
     try:
-        path = str(uuid.uuid1()) + '.nii'
+        nowTime = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
+        outputPath = nowTime + '.nii'
+        savePath = 'static/data/' + nowTime
+        if not os.path.exists(savePath):
+            os.mkdir(savePath)
+
         imgs = []
         for img in request.files:
-            # files.append(request.files[img])
             img_bytes = request.files[img].read()
+            fileName = request.files[img].filename.split('/')[1]
+            with open(savePath + '/' + fileName, 'wb') as f:
+                f.write(img_bytes)
+            f.close()
             image = Image.open(io.BytesIO(img_bytes))
             img = np.array(image)
             imgs.append(img)
+
+        # 打包成 zip
+        zip_files(savePath, savePath)
+        shutil.rmtree(savePath)
+
         imgnii = np.stack(imgs, axis=0)
         nii = sitk.GetImageFromArray(imgnii)
-        sitk.WriteImage(nii, './static/data/'+path)
-        return_info['result'] = 'data/' + path
+        sitk.WriteImage(nii, './static/data/' + outputPath)
+        return_info['result'] = 'data/' + outputPath
         return_info['msg'] = 'success'
+
+        # 保存用户操作日志到数据库
+        saveUserLog('pngtonii_res', 'nii', 'data/' + nowTime + '.zip', str(return_info['result']))
     except Exception as e:
         return_info['err'] = str(e)
     return return_info
@@ -661,30 +761,37 @@ def pngtonii():
 def niitopng_res():
     return_info = {}
     try:
-        path = str(uuid.uuid1())
         nii_file = request.files.get('file')
-        file = path + '.nii'
-        with open('static/data/' + file, 'wb+') as f:
-            f.write(nii_file.read())
-        f.close()
-        img = nib.load('static/data/'+file)
-        img_fdata = img.get_fdata()
+
+        nowTime = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
+        file = nowTime + '.nii'
         fname = file.replace('.nii', '')
         img_f_path = os.path.join('static/data/', fname)
+        zip_path = 'static/data/' + nowTime
+
+        with open('static/data/' + file, 'wb') as f:
+            f.write(nii_file.read())
+        f.close()
+
+        img = nib.load('static/data/'+file)
+        img_fdata = img.get_fdata()
+
         if not os.path.exists(img_f_path):
             os.mkdir(img_f_path)
         (x, y, z) = img.shape
         for i in range(z):  # z是图像的序列
             silce = img_fdata[:, :, i]  # 选择哪个方向的切片都可以
             imageio.imwrite(os.path.join(img_f_path, '{}.png'.format(i)), silce)  # 保存图像
-        dir_path = img_f_path
-        zip_path = 'static/data/' + nii_file.filename.replace('.nii', '') + path
-        zip_files(dir_path, zip_path)
-        shutil.rmtree(dir_path)
-        # img = nib.load(nii.read())
-        # img_fdata = img.get_fdata()
-        return_info['result'] = 'data/' + nii_file.filename.replace('.nii', '') + path + '.zip'
+
+        # 打包成 zip
+        zip_files(img_f_path, zip_path)
+        shutil.rmtree(img_f_path)
+
+        return_info['result'] = 'data/' + nowTime + '.zip'
         return_info['msg'] = 'success'
+
+        # 保存用户操作日志到数据库
+        saveUserLog('niitopng_res', 'zip', 'data/' + file, str(return_info['result']))
     except Exception as e:
         return_info['err'] = str(e)
     return return_info
@@ -734,6 +841,3 @@ def muchrgbtol():
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=98765)
-
-
-
