@@ -76,22 +76,9 @@
                     <div class="focus-cause">
                         <div class="section-header">
                             <h2>功能介绍</h2>
-                            <p>借助itk工具将2D与3D医学影像相互转换，能够进行单、多张RBG图像转换为灰度图像。</p>
+                            <p>借助itk工具将2D与3D医学影像相互转换。</p>
                         </div>
                         <div class="row">
-                            <div class="col-lg-4 col-sm-6 col-12">
-                                <div class="cause-items">
-                                    <div class="cause-content">
-                                        <div class="price-title">
-                                            <div class="price-left">
-                                                <h5>png堆叠转换nii文件</h5>
-                                            </div>
-                                        </div>
-                                        <p>作用于将文件夹下所有编排妥当的灰度CT图像堆叠成3Dnii文件</p>
-                                        <a href="{{ url_for('pngtonii') }}" class="btn btn-default">开始转换</a>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-lg-4 col-sm-6 col-12">
                                 <div class="cause-items">
                                     <div class="cause-content">
@@ -102,6 +89,19 @@
                                         </div>
                                         <p>作用于将nii3D文件转换为2Dpng格式，支持下载图像压缩包</p>
                                         <a href="{{ url_for('niitopng') }}" class="btn btn-default">开始转换</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6 col-12">
+                                <div class="cause-items">
+                                    <div class="cause-content">
+                                        <div class="price-title">
+                                            <div class="price-left">
+                                                <h5>png堆叠转换nii文件</h5>
+                                            </div>
+                                        </div>
+                                        <p>作用于将文件夹下所有编排妥当的灰度CT图像堆叠成3Dnii文件</p>
+                                        <a href="{{ url_for('pngtonii') }}" class="btn btn-default">开始转换</a>
                                     </div>
                                 </div>
                             </div>

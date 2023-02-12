@@ -162,8 +162,8 @@ def userLogInfo():
     lists = []
     res = {}
 
-    routers = {'resultCT': 'CT影像类别预测', 'resultXray': 'X光片类别预测',
-                   'focalpoint_res': '标记CT影像病灶点', 'heatmap_res': '绘制CT热力图',
+    routers = {'resultCT': 'CT图像类别预测', 'resultXray': 'X光片类别预测',
+                   'focalpoint_res': '标记CT图像COVID-19病灶点', 'heatmap_res': '绘制CT图像热力图',
                    'segXray_res': '绘制X光片肺部标记图', 'pngtonii_res': 'png堆叠转换nii文件',
                    'niitopng_res': 'nii文件转化为png格式'}
     try:
@@ -801,42 +801,6 @@ def niitopng_res():
 @login_required
 def niitopng():
     return render_template("niitopng.html")
-
-
-@app.route("/muchrgbtol_res", methods=["GET", "POST"])
-@login_required
-def muchrgbtol_res():
-    return_info = {}
-    try:
-        path = str(uuid.uuid1())
-        dir_path = './static/data/' + path
-        zip_path = './static/data/' + path
-        for ig in request.files:
-            # files.append(request.files[img])
-            img_bytes = request.files[ig].read()
-            img = cv2.imdecode(np.frombuffer(img_bytes, np.uint8), 1)
-            row, col, channel = img.shape
-            img_gray = np.zeros((row, col))
-            for r in range(row):
-                for l in range(col):
-                    img_gray[r, l] = 1 / 2 * max(img[r, l, 0], img[r, l, 1], img[r, l, 2]) + 1 / 2 * min(
-                        img[r, l, 0], img[r, l, 1], img[r, l, 2])
-            if not os.path.exists('./static/data/' + path):
-                os.mkdir('./static/data/' + path)
-            cv2.imwrite('./static/data/' + path + '/' + request.files[ig].filename.split('/')[1], img_gray)
-        zip_files(dir_path, zip_path)
-        shutil.rmtree(dir_path)
-        return_info['result'] = 'data/' + path + '.zip'
-        return_info['msg'] = 'success'
-    except Exception as e:
-        return_info['err'] = str(e)
-    return return_info
-
-
-@app.route("/muchrgbtol", methods=["GET", "POST"])
-@login_required
-def muchrgbtol():
-    return render_template("muchrgbtol.html")
 
 
 if __name__ == '__main__':

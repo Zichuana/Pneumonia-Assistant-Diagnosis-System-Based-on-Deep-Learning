@@ -147,8 +147,8 @@
                         <div class="row">
                             <div class="col-lg-8">
                                 <div class="about-greenforest-content">
-                                    <h2>基于深度学习的COVID-19胸部CT辅助诊断系统</h2>
-                                    <p><span>新型冠状病毒（COVID-19）暴发以来，医学影像（如胸部X光片、胸部CT）成为筛查新冠疑似患者的重要工具，但也给影像科医师带来了巨大的压力。深度学习算法能够在发热门诊场景下高效标记疑似病例并提示医师，减少传统临床流程中疑似患者的诊断等待时间，促进疑似病例的及时干预同时减小院内交叉感染风险，所以COVID-19医学影像辅助诊断系统的研究具有非常重要的实际临床应用价值。</span>
+                                    <h2>基于深度学习的COVID-19辅助诊断系统</h2>
+                                    <p><span>目前2019冠状病毒感染病情的防控已全面放开，多数感染患者可以自愈，但截至今日仍然存在部分患者死于肺部感染或一系列并发症。该系统通过分析用户上传肺部CT对患者是否有一定的肺部感染就行相应的建议，让患者及时向相关医疗机构就行就诊，降低抵抗力薄弱人群肺部感染未及时整治所造的危害。</span>
                                     </p>
                                     <p>项目实现预测单张，多张CT为COVID-19患者的胸片、普通肺炎患者的胸片、正常健康状况下的胸片的概率值，甄别肺结核胸部X光片。基于深度学习的语义分割确定病灶点，绘制热力图。实现医学图像之间转换，便于转换使用PNG进行预测，或分割图像堆叠NII图像，便于3D成像观测。
                                     </p>
@@ -181,7 +181,7 @@
                                 <div class="col-lg-3 col-sm-6 col-12">
                                     <div class="count-items">
                                         <i class="flaticon-man"></i>
-                                        <span class="counter" data-to="7" data-speed="1500"></span>
+                                        <span class="counter" data-to="5" data-speed="1500"></span>
                                         <h4>设计人数</h4>
                                     </div>
                                 </div>
@@ -195,8 +195,8 @@
                                 <div class="col-lg-3 col-sm-6 col-12">
                                     <div class="count-items">
                                         <i class="flaticon-people"></i>
-                                        <span class="counter" data-to="10" data-speed="1500"></span><span>+</span>
-                                        <h4>注册用户</h4>
+                                        <span class="counter" data-to="9" data-speed="1500"></span><span>+</span>
+                                        <h4>使用功能</h4>
                                     </div>
                                 </div>
                             </div>
@@ -211,8 +211,8 @@
                 <div class="row">
                     <div class="our-services-option">
                         <div class="section-header">
-                            <h2>关于我们</h2>
-                            <p>**********暂时隐藏**********</p>
+                            <h2>相关功能</h2>
+                            <p></p>
                         </div>
                         <div class="row">
                             <div class="col-lg-4 col-sm-6 col-12">
@@ -234,7 +234,7 @@
                                         <i class="flaticon-technology"></i>
                                         <div class="our-services-content">
                                             <h4><a href="{{ url_for('segmentation') }}">图像分割</a></h4>
-                                            <p>标记单张CT影像病灶点，绘制X光片肺部标记图，绘制单张CT影像热力图，支持下载结果图像。</p>
+                                            <p>标记CT图像CPVID-19病灶点，绘制X光片肺部标记图，绘制CT影像热力图，支持下载结果图像。</p>
                                             <a href="{{ url_for('segmentation') }}">立即试用<i
                                                     class="fa fa-angle-double-right" aria-hidden="true"></i></a>
                                         </div>
@@ -247,7 +247,7 @@
                                         <i class="flaticon-light-bulb"></i>
                                         <div class="our-services-content">
                                             <h4><a href="{{ url_for('conversion') }}">图像转换</a></h4>
-                                            <p>借助itk工具将2D与3D医学影像相互转换，能够进行单、多张RBG图像转换为灰度图像</p>
+                                            <p>借助itk工具将2D与3D医学影像相互转换。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                                             <a href="{{ url_for('conversion') }}">立即试用<i
                                                     class="fa fa-angle-double-right" aria-hidden="true"></i></a>
                                         </div>
