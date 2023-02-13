@@ -15,42 +15,60 @@
     <link rel="stylesheet" type="text/css" href="css/lightcase.css" media="all">
     <link rel="stylesheet" type="text/css" href="css/jquery.nstSlider.css" media="all">
     <link rel="stylesheet" type="text/css" href="css/flexslider.css" media="all">
-    <link rel="stylesheet" type="text/css" href="css/mermaid.min.css" media="all" >
 
     <!-- own style css -->
     <link rel="stylesheet" type="text/css" href="css/style.css" media="all">
     <link rel="stylesheet" type="text/css" href="css/rtl.css" media="all">
     <link rel="stylesheet" type="text/css" href="css/responsive.css" media="all">
 
-    <title>HTML5上传图片并预览</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <!-- image upload css -->
+    <link rel="stylesheet" type="text/css" href="css/common-multiple.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
 
 </head>
-
 <style>
-    .bt {
+    #b0 {
         background: #10b210;
+        /* border: 1px solid #CCC; */
+        margin-top: 20px;
+        padding: 4px 10px;
         overflow: hidden;
         text-indent: 0;
-        width: 60px;
-        height: 30px;
-        color: #5c636a;
-        font-size: 14px;
+        width: 80px;
+        height: 40px;
+        line-height: 20px;
+        border-radius: 5px;
+        color: #FFFFFF;
+        font-size: 16px;
+    }
+
+    #img1 {
+        border-style: groove;
+        border-width: 1px;
+        border-color: black;
+        height: 360px;
+        width: auto;
+        margin-left: 40px;
+    }
+
+    .upimg-div .up-section {
+        width: 380px;
+        height: 360px;
+    }
+
+    .img-box .upimg-div .z_file {
+        width: 380px;
+        height: 360px;
+    }
+
+    .z_file .add-img {
+        display: block;
+        width: 380px;
+        height: 360px;
     }
 </style>
 
 <body>
-    <div id="loading">
-        <div id="loading-center">
-            <div id="loading-center-absolute">
-                <div class="object" id="object_one"></div>
-                <div class="object" id="object_two"></div>
-                <div class="object" id="object_three"></div>
-                <div class="object" id="object_four"></div>
-            </div>
-        </div>
-    </div>
     <div class="box-layout">
 
         <header class="header-style-2">
@@ -73,10 +91,10 @@
                                         <ul>
                                             <li><a href="{{ url_for('index') }}">主页</a></li>
                                             <li><a href="{{ url_for('predict') }}">分类预测</a></li>
-                                            <li><a href="{{ url_for('segmentation') }}">图像分割</a></li>
+                                            <li><a href="{{ url_for('segmentation') }}" class="active">图像分割</a></li>
                                             <li><a href="{{ url_for('conversion') }}">图像转换</a></li>
                                             <li><a href="{{ url_for('feedback') }}">用户反馈</a></li>
-                                            <li><a href="{{ url_for('user') }}" class="active">用户中心</a></li>
+                                            <li><a href="{{ url_for('user') }}">用户中心</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -87,11 +105,42 @@
             </div>
         </header>
 
-        <section class="bg-servicesstyle2-section">
+        <section class="bg-about-greenforest">
+            <div class="container img-box full">
+                <section class=" img-section">
+                    <div class="z_photo upimg-div clear">
+                        <section class="z_file fl">
+                            <img src="{{info.result.userInput}}" class="add-img">
+                        </section>
+                        <section  class="z_file fl">
+                            <div style="width: 600px; height: 240px; margin: 120px 0 0 80px">
+                                {% for foo in info.result.result %}
+                                    <div style="border-bottom: 1px; border-bottom: 1px solid #CCCCCC; line-height: 60px; font-size:16px;">
+                                        {{foo}}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </section>
+                    </div>
+                </section>
+            </div>
+            <div>
+                <p id="err" style="padding-left: 40px; padding-top: 10px; color: darkred"></p>
+            </div>
+        </section>
+
+        <section class="bg-about-greenforest">
             <div class="container">
                 <div class="row">
-                    <div class="col-12">
-                        <div id="table" style="margin-top: 30px"></div>
+                    <div class="about-greenforest">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="about-greenforest-content">
+                                    <p><span style="color: red;">*</span>请勿将此预测用于自诊断，仅作为辅助建议工具，你应向你的地方当局咨询关于寻求医疗援助的最新建议。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -113,6 +162,14 @@
             </div>
         </section>
     </div>
+
+    <aside class="mask works-mask">
+        <div class="mask-content">
+            <p class="del-p ">您确定要删除图片吗？</p>
+            <p class="check-p"><span class="del-com wsdel-ok">确定</span><span class="wsdel-no">取消</span></p>
+        </div>
+    </aside>
+
     <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
@@ -127,93 +184,12 @@
     <script type="text/javascript" src="js/isotope.pkgd.min.js"></script>
     <script type="text/javascript" src="js/custom.isotope.js"></script>
     <script type="text/javascript" src="js/custom.js"></script>
-    <script type="text/javascript" src="js/gridjs.umd.js"></script>
-    <script type="text/javascript" src="js/l10n.umd.js"></script>
-</body>
+    <script type="text/javascript" src="js/imgUp.js"></script>
+
 <script type="text/javascript">
-    test();
-
-    Date.prototype.format = function(fmt) {
-         var o = {
-            "M+" : this.getMonth()+1,                 //月份
-            "d+" : this.getDate(),                    //日
-            "h+" : this.getHours(),                   //小时
-            "m+" : this.getMinutes(),                 //分
-            "s+" : this.getSeconds(),                 //秒
-            "q+" : Math.floor((this.getMonth()+3)/3), //季度
-            "S"  : this.getMilliseconds()             //毫秒
-        };
-        if(/(y+)/.test(fmt)) {
-                fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
-        }
-         for(var k in o) {
-            if(new RegExp("("+ k +")").test(fmt)){
-                 fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
-             }
-         }
-        return fmt;
-    }
-
-    function test() {
-        $.ajax({
-            type: 'POST',
-            url: "userLogInfo",
-            // data: [],
-            async: false,       //同步执行
-            processData: false, // 告诉jquery要传输data对象
-            contentType: false, //告诉jquery不需要增加请求头对于contentType的设置
-            success: function (arg) {
-                // console.log(arg)
-                new gridjs.Grid({
-                    sort: true,
-                    columns: [
-                        {id: 'id', hidden: true},
-                        {id: 'resType', hidden: true},
-                        {id: 'useType', name: '操作类型'},
-                        {
-                            id: 'userInput',
-                            name: '预测文件',
-                            formatter: (cell, row) => {
-                                return gridjs.html(`<a href="${cell}" style="color: #007bff">${cell.split('/')[1]}</a>`)
-                            }
-                        },
-                        {
-                            id: 'dateTime',
-                            name: '操作时间',
-                            formatter: (cell) => new Date(cell).format('yyyy-MM-dd hh:mm:ss')
-                        },
-                        {
-                            id: 'result', name: '查看详情', formatter: (cell, row) => {
-                                if (row.cells[1].data == 'image' || row.cells[1].data == 'text') {
-                                    return gridjs.h('button', {
-                                        className: 'bt',
-                                        onClick: () => window.open('/logStatus?id=' + row.cells[0].data)
-                                    }, '查看');
-                                } else {
-                                    return gridjs.html(`<a href="${cell}" style="color: #007bff">${cell.split('/')[1]}</a>`)
-                                }
-                            }
-                        }
-                    ],
-                    pagination: {
-                        limit: 10,
-                    },
-                    language: {
-                        'pagination': {
-                          'previous': '←',
-                          'next': '→',
-                        }
-                    },
-                    data: arg.result,
-                    style: {
-                        table: {textAlign: 'center'},
-                    }
-                }).render(document.getElementById("table"));
-            }, error: function () {
-                console.log("后台处理错误");
-            }
-        });
-    }
+    info = '{{ info|tojson }}';
 </script>
+
+</body>
 
 </html>
