@@ -160,7 +160,6 @@ def feedback():
 def userLogInfo():
     info = {}
     lists = []
-    res = {}
 
     routers = {'resultCT': 'CT图像类别预测', 'resultXray': 'X光片类别预测',
                    'focalpoint_res': '标记CT图像COVID-19病灶点', 'heatmap_res': '绘制CT图像热力图',
@@ -171,7 +170,9 @@ def userLogInfo():
             id = current_user.get_id()
             userlogs = UserLog.query.filter(UserLog.userId == id).all()
             for userlog in userlogs:
+                res = {}
                 # res['userName'] = userlog.username
+                res['id'] = userlog.id
                 res['useType'] = routers[userlog.router]
                 res['userInput'] = userlog.userInput
                 res['resType'] = userlog.resType
@@ -184,6 +185,35 @@ def userLogInfo():
         info['err'] = str(e)
     return jsonify(info)
 
+
+@app.route('/logStatus', methods=["POST", "GET"])
+@login_required
+def log_status():
+    info = {}
+    res = {}
+    routers = {'resultCT': 'CT图像类别预测', 'resultXray': 'X光片类别预测',
+               'focalpoint_res': '标记CT图像COVID-19病灶点', 'heatmap_res': '绘制CT图像热力图',
+               'segXray_res': '绘制X光片肺部标记图', 'pngtonii_res': 'png堆叠转换nii文件',
+               'niitopng_res': 'nii文件转化为png格式'}
+    try:
+        id = request.args.get('id')
+        userlog = UserLog.query.filter(UserLog.id == id).all()
+        # res['userName'] = userlog.username
+        res['id'] = userlog[0].id
+        res['useType'] = routers[userlog[0].router]
+        res['userInput'] = userlog[0].userInput
+        res['resType'] = userlog[0].resType
+        res['result'] = json.loads(userlog[0].result)
+        res['dateTime'] = userlog[0].dateTime
+        info['result'] = res
+
+        if userlog[0].resType == 'text':
+            info['router'] = 'logStatus2.html'
+        else:
+            info['router'] = 'logStatus.html'
+    except Exception as e:
+        info['err'] = str(e)
+    return render_template(info['router'], info=info)
 
 
 # 3、加载用户, login_required 需要查询用户信息
@@ -494,7 +524,7 @@ def saveUserLog(router, resType, userInput, output):
     userlog.router = router
     userlog.resType = resType
     userlog.userInput = userInput
-    userlog.result = output
+    userlog.result = json.dumps(output)
     db.session.add(userlog)
     db.session.commit()
     # except Exception as e:
@@ -529,7 +559,7 @@ def result():
 
     info = get_prediction(image_bytes=img_bytes)
 
-    saveUserLog('resultCT', 'text', savePath, str(info['result']))
+    saveUserLog('resultCT', 'text', savePath, info['result'])
     return jsonify(info)  # json格式传至前端
 
 
@@ -548,7 +578,7 @@ def resultXray():
     savePath = saveImage(img_bytes)
 
     info = get_prediction_x(image_bytes=img_bytes)
-    saveUserLog('resultXray', 'text', savePath, str(info['result']))
+    saveUserLog('resultXray', 'text', savePath, info['result'])
     return jsonify(info)  # json格式传至前端
 
 
@@ -606,7 +636,7 @@ def heatmap_res():
         return_info["result"] = 'data/' + outputPath
 
         # 保存用户操作日志到数据库
-        saveUserLog('heatmap_res', 'image', savePath, str(return_info['result']))
+        saveUserLog('heatmap_res', 'image', savePath, return_info['result'])
     except Exception as e:
         return_info['err'] = str(e)
     return return_info
@@ -648,7 +678,7 @@ def segXray_res():
         return_info["result"] = 'data/' + outputPath
 
         # 保存用户操作日志到数据库
-        saveUserLog('segXray_res', 'image', savePath, str(return_info['result']))
+        saveUserLog('segXray_res', 'image', savePath, return_info['result'])
     except Exception as e:
         return_info['err'] = str(e)
     return return_info
@@ -693,7 +723,7 @@ def focalpoint_res():
         return_info["result"] = 'data/' + outputPath
 
         # 保存用户操作日志到数据库
-        saveUserLog('focalpoint_res', 'image', savePath, str(return_info['result']))
+        saveUserLog('focalpoint_res', 'image', savePath, return_info['result'])
     except Exception as e:
         return_info['err'] = str(e)
     return return_info
@@ -744,7 +774,7 @@ def pngtonii_res():
         return_info['msg'] = 'success'
 
         # 保存用户操作日志到数据库
-        saveUserLog('pngtonii_res', 'nii', 'data/' + nowTime + '.zip', str(return_info['result']))
+        saveUserLog('pngtonii_res', 'nii', 'data/' + nowTime + '.zip', return_info['result'])
     except Exception as e:
         return_info['err'] = str(e)
     return return_info
@@ -791,7 +821,7 @@ def niitopng_res():
         return_info['msg'] = 'success'
 
         # 保存用户操作日志到数据库
-        saveUserLog('niitopng_res', 'zip', 'data/' + file, str(return_info['result']))
+        saveUserLog('niitopng_res', 'zip', 'data/' + file, return_info['result'])
     except Exception as e:
         return_info['err'] = str(e)
     return return_info

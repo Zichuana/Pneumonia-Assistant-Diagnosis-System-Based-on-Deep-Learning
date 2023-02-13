@@ -61,5 +61,3 @@ class UserLog(db.Model):
     resType = db.Column(db.String(255), nullable=False)
     result = db.Column(db.String(255), nullable=False)
 
-    # 非数据库字段
-    useType = ''
