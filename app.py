@@ -6,6 +6,7 @@ import cv2
 import uuid
 import datetime
 from dataclasses import dataclass
+import waitress
 
 from matplotlib import pyplot as plt
 import nibabel
@@ -834,4 +835,5 @@ def niitopng():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=98765)
+    # app.run(host="0.0.0.0", port=33229)
+    waitress.serve(app, host='127.0.0.1', port='33229')
