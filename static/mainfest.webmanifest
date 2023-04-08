@@ -1,0 +1,15 @@
+{
+  "background_color": "gray",
+  "description": "Hand acupoint recognition based on mediapipe.",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "src": "/icon/hand-icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "name": "FFZDdm",
+  "short_name": "FFZDdm",
+  "start_url": "/"
+}

@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>COVID-19辅助诊断</title>
+    <link href="mainfest.webmanifest" rel="manifest">
     <!-- Plugin css -->
     <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" media="all">
     <link rel="stylesheet" type="text/css" href="css/flaticon.css" media="all">
@@ -15,7 +16,6 @@
     <link rel="stylesheet" type="text/css" href="css/lightcase.css" media="all">
     <link rel="stylesheet" type="text/css" href="css/jquery.nstSlider.css" media="all">
     <link rel="stylesheet" type="text/css" href="css/flexslider.css" media="all">
-
     <!-- own style css -->
     <link rel="stylesheet" type="text/css" href="css/style.css" media="all">
     <link rel="stylesheet" type="text/css" href="css/rtl.css" media="all">
@@ -24,100 +24,74 @@
 </head>
 
 <body>
-
-    <div id="loading">
-        <div id="loading-center">
-            <div id="loading-center-absolute">
-                <div class="object" id="object_one"></div>
-                <div class="object" id="object_two"></div>
-                <div class="object" id="object_three"></div>
-                <div class="object" id="object_four"></div>
-            </div>
+<button class="add-button">Add to home screen</button>
+<div id="loading">
+    <div id="loading-center">
+        <div id="loading-center-absolute">
+            <div class="object" id="object_one"></div>
+            <div class="object" id="object_two"></div>
+            <div class="object" id="object_three"></div>
+            <div class="object" id="object_four"></div>
         </div>
     </div>
+</div>
 
-    <div class="box-layout">
-
-        <header class="header-style-2">
-            <div class="bg-main-menu menu-scroll">
-                <div class="container">
-                    <div class="row">
-                        <div class="main-menu">
-                            <div class="main-menu-bottom">
-                                <div class="navbar-header">
-                                    <button type="button" class="navbar-toggler collapsed d-lg-none"
+<div class="box-layout">
+    <header class="header-style-2">
+        <div class="bg-main-menu menu-scroll">
+            <div class="container">
+                <div class="row">
+                    <div class="main-menu">
+                        <div class="main-menu-bottom">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggler collapsed d-lg-none"
                                         data-bs-toggle="collapse" data-bs-target="#bs-example-navbar-collapse-1"
                                         aria-controls="bs-example-navbar-collapse-1" aria-expanded="false">
                                         <span class="navbar-toggler-icon">
                                             <i class="fa fa-bars"></i>
                                         </span>
-                                    </button>
-                                </div>
-                                <div class="main-menu-area">
-                                    <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
-                                        <ul>
-                                            <li><a href="{{ url_for('index') }}" class="active">主页</a></li>
-                                            <li><a href="{{ url_for('predict') }}">分类预测</a></li>
-                                            <li><a href="{{ url_for('segmentation') }}">图像分割</a></li>
-                                            <li><a href="{{ url_for('conversion') }}">图像转换</a></li>
-                                            <li><a href="{{ url_for('feedback') }}">用户反馈</a></li>
-                                            <li><a href="{{ url_for('user') }}">用户中心</a></li>
-                                        </ul>
-                                    </div>
+                                </button>
+                            </div>
+                            <div class="main-menu-area">
+                                <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
+                                    <ul>
+                                        <li><a href="{{ url_for('index') }}" class="active">主页</a></li>
+                                        <li><a href="{{ url_for('predict') }}">分类预测</a></li>
+                                        <li><a href="{{ url_for('segmentation') }}">图像分割</a></li>
+                                        <li><a href="{{ url_for('conversion') }}">图像转换</a></li>
+                                        <li><a href="{{ url_for('feedback') }}">用户反馈</a></li>
+                                        <li><a href="{{ url_for('user') }}">用户中心</a></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </header>
+        </div>
+    </header>
 
-        <section class="bg-slider-option">
-            <div class="slider-option slider-two">
-                <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active" data-bs-interval="10000">
-                            <div class="slider-item">
-                                <img src="images/5.png" alt="bg-slider-2">
-                                <div class="slider-content-area">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-md-6"></div>
-                                            <div class="col-md-6">
-                                                <div class="slider-content">
-                                                    <h3></h3>
-                                                    <h2>注册登入后跳转至反馈界面</h2>
-                                                    <p>希望能为您带来一些帮助</p>
-                                                    <div class="slider-btn">
-                                                        <a href="{{ url_for('login') }}" class="btn btn-default"
-                                                            style="width: 125px">登录</a>
-                                                        <a href="{{ url_for('register') }}" class="btn btn-default"
-                                                            style="width: 125px">注册</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item" data-bs-interval="2000">
-                            <div class="slider-item">
-                                <img src="images/2.png" alt="bg-slider-2">
-                                <div class="slider-content-area">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-md-6"></div>
-                                            <div class="col-md-6">
-                                                <div class="slider-content">
-                                                    <h2>请勿将此预测用于自诊断</h2>
-                                                    <p>作为辅助参考</p>
-                                                    <div class="slider-btn">
-                                                        <a href="{{ url_for('login') }}" class="btn btn-default"
-                                                            style="width: 125px">登录</a>
-                                                        <a href="{{ url_for('register') }}" class="btn btn-default"
-                                                            style="width: 125px">注册</a>
-                                                    </div>
+    <section class="bg-slider-option">
+        <div class="slider-option slider-two">
+            <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" data-bs-interval="10000">
+                        <div class="slider-item">
+                            <img src="images/5.png" alt="bg-slider-2">
+                            <div class="slider-content-area">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-6"></div>
+                                        <div class="col-md-6">
+                                            <div class="slider-content">
+                                                <h3></h3>
+                                                <h2>注册登入后跳转至反馈界面</h2>
+                                                <p>希望能为您带来一些帮助</p>
+                                                <div class="slider-btn">
+                                                    <a href="{{ url_for('login') }}" class="btn btn-default"
+                                                       style="width: 125px">登录</a>
+                                                    <a href="{{ url_for('register') }}" class="btn btn-default"
+                                                       style="width: 125px">注册</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -126,131 +100,156 @@
                             </div>
                         </div>
                     </div>
-                    <button class="left carousel-control carousel-control-prev" type="button"
+                    <div class="carousel-item" data-bs-interval="2000">
+                        <div class="slider-item">
+                            <img src="images/2.png" alt="bg-slider-2">
+                            <div class="slider-content-area">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-6"></div>
+                                        <div class="col-md-6">
+                                            <div class="slider-content">
+                                                <h2>请勿将此预测用于自诊断</h2>
+                                                <p>作为辅助参考</p>
+                                                <div class="slider-btn">
+                                                    <a href="{{ url_for('login') }}" class="btn btn-default"
+                                                       style="width: 125px">登录</a>
+                                                    <a href="{{ url_for('register') }}" class="btn btn-default"
+                                                       style="width: 125px">注册</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="left carousel-control carousel-control-prev" type="button"
                         data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="right carousel-control carousel-control-next" type="button"
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="right carousel-control carousel-control-next" type="button"
                         data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="bg-about-greenforest">
-            <div class="container">
-                <div class="row">
-                    <div class="about-greenforest">
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <div class="about-greenforest-content">
-                                    <h2>基于深度学习的COVID-19辅助诊断系统</h2>
-                                    <p><span>目前2019冠状病毒感染病情的防控已全面放开，多数感染患者可以自愈，但截至今日仍然存在部分患者死于肺部感染或一系列并发症。该系统通过分析用户上传肺部CT对患者是否有一定的肺部感染就行相应的建议，让患者及时向相关医疗机构就行就诊，降低抵抗力薄弱人群肺部感染未及时整治所造的危害。</span>
-                                    </p>
-                                    <p>项目实现预测单张，多张CT为COVID-19患者的胸片、普通肺炎患者的胸片、正常健康状况下的胸片的概率值，甄别肺结核胸部X光片。基于深度学习的语义分割确定病灶点，绘制热力图。实现医学图像之间转换，便于转换使用PNG进行预测，或分割图像堆叠NII图像，便于3D成像观测。
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="about-greenforest-img">
-                                    <img src="images/4.png" alt="about-greenforet-img" class="img-responsive">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="bg-count2-section">
-            <div class="count-overlay">
-                <div class="container">
+    <section class="bg-about-greenforest">
+        <div class="container">
+            <div class="row">
+                <div class="about-greenforest">
                     <div class="row">
-                        <div class="count-option">
-                            <div class="row">
-                                <div class="col-lg-3 col-sm-6 col-12">
-                                    <div class="count-items">
-                                        <i class="flaticon-internet"></i>
-                                        <span class="counter" data-to="15" data-speed="1500"></span>
-                                        <h4>项目规划</h4>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-6 col-12">
-                                    <div class="count-items">
-                                        <i class="flaticon-man"></i>
-                                        <span class="counter" data-to="5" data-speed="1500"></span>
-                                        <h4>设计人数</h4>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-6 col-12">
-                                    <div class="count-items">
-                                        <i class="flaticon-rocket-launch"></i>
-                                        <span class="counter" data-to="92" data-speed="1500"></span><span>%+</span>
-                                        <h4>模型精确率</h4>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-6 col-12">
-                                    <div class="count-items">
-                                        <i class="flaticon-people"></i>
-                                        <span class="counter" data-to="9" data-speed="1500"></span><span>+</span>
-                                        <h4>使用功能</h4>
-                                    </div>
-                                </div>
+                        <div class="col-lg-8">
+                            <div class="about-greenforest-content">
+                                <h2>基于深度学习的COVID-19辅助诊断系统</h2>
+                                <p><span>目前2019冠状病毒感染病情的防控已全面放开，多数感染患者可以自愈，但截至今日仍然存在部分患者死于肺部感染或一系列并发症。该系统通过分析用户上传肺部CT对患者是否有一定的肺部感染就行相应的建议，让患者及时向相关医疗机构就行就诊，降低抵抗力薄弱人群肺部感染未及时整治所造的危害。</span>
+                                </p>
+                                <p>
+                                    项目实现预测单张，多张CT为COVID-19患者的胸片、普通肺炎患者的胸片、正常健康状况下的胸片的概率值，甄别肺结核胸部X光片。基于深度学习的语义分割确定病灶点，绘制热力图。实现医学图像之间转换，便于转换使用PNG进行预测，或分割图像堆叠NII图像，便于3D成像观测。
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="about-greenforest-img">
+                                <img src="images/4.png" alt="about-greenforet-img" class="img-responsive">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="bg-servicesstyle2-section">
+    <section class="bg-count2-section">
+        <div class="count-overlay">
             <div class="container">
                 <div class="row">
-                    <div class="our-services-option">
-                        <div class="section-header">
-                            <h2>相关功能</h2>
-                            <p></p>
-                        </div>
+                    <div class="count-option">
                         <div class="row">
-                            <div class="col-lg-4 col-sm-6 col-12">
-                                <div class="our-services-box">
-                                    <div class="our-services-items">
-                                        <i class="flaticon-greenhouse"></i>
-                                        <div class="our-services-content">
-                                            <h4><a href="{{ url_for('predict') }}">分类预测</a></h4>
-                                            <p>可对单张、多张CT影像与X光片进行类别预测，具有较高的准确率。</p>
-                                            <a href="{{ url_for('predict') }}">立即试用<i class="fa fa-angle-double-right"
-                                                    aria-hidden="true"></i></a>
-                                        </div>
+                            <div class="col-lg-3 col-sm-6 col-12">
+                                <div class="count-items">
+                                    <i class="flaticon-internet"></i>
+                                    <span class="counter" data-to="15" data-speed="1500"></span>
+                                    <h4>项目规划</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6 col-12">
+                                <div class="count-items">
+                                    <i class="flaticon-man"></i>
+                                    <span class="counter" data-to="5" data-speed="1500"></span>
+                                    <h4>设计人数</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6 col-12">
+                                <div class="count-items">
+                                    <i class="flaticon-rocket-launch"></i>
+                                    <span class="counter" data-to="92" data-speed="1500"></span><span>%+</span>
+                                    <h4>模型精确率</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6 col-12">
+                                <div class="count-items">
+                                    <i class="flaticon-people"></i>
+                                    <span class="counter" data-to="9" data-speed="1500"></span><span>+</span>
+                                    <h4>使用功能</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-servicesstyle2-section">
+        <div class="container">
+            <div class="row">
+                <div class="our-services-option">
+                    <div class="section-header">
+                        <h2>相关功能</h2>
+                        <p></p>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-6 col-12">
+                            <div class="our-services-box">
+                                <div class="our-services-items">
+                                    <i class="flaticon-greenhouse"></i>
+                                    <div class="our-services-content">
+                                        <h4><a href="{{ url_for('predict') }}">分类预测</a></h4>
+                                        <p>可对单张、多张CT影像与X光片进行类别预测，具有较高的准确率。</p>
+                                        <a href="{{ url_for('predict') }}">立即试用<i class="fa fa-angle-double-right"
+                                                                                  aria-hidden="true"></i></a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-sm-6 col-12">
-                                <div class="our-services-box">
-                                    <div class="our-services-items">
-                                        <i class="flaticon-technology"></i>
-                                        <div class="our-services-content">
-                                            <h4><a href="{{ url_for('segmentation') }}">图像分割</a></h4>
-                                            <p>标记CT图像CPVID-19病灶点，绘制X光片肺部标记图，绘制CT影像热力图，支持下载结果图像。</p>
-                                            <a href="{{ url_for('segmentation') }}">立即试用<i
-                                                    class="fa fa-angle-double-right" aria-hidden="true"></i></a>
-                                        </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6 col-12">
+                            <div class="our-services-box">
+                                <div class="our-services-items">
+                                    <i class="flaticon-technology"></i>
+                                    <div class="our-services-content">
+                                        <h4><a href="{{ url_for('segmentation') }}">图像分割</a></h4>
+                                        <p>标记CT图像CPVID-19病灶点，绘制X光片肺部标记图，绘制CT影像热力图，支持下载结果图像。</p>
+                                        <a href="{{ url_for('segmentation') }}">立即试用<i
+                                                class="fa fa-angle-double-right" aria-hidden="true"></i></a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-sm-6 col-12">
-                                <div class="our-services-box">
-                                    <div class="our-services-items">
-                                        <i class="flaticon-light-bulb"></i>
-                                        <div class="our-services-content">
-                                            <h4><a href="{{ url_for('conversion') }}">图像转换</a></h4>
-                                            <p>借助itk工具将2D与3D医学影像相互转换。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                                            <a href="{{ url_for('conversion') }}">立即试用<i
-                                                    class="fa fa-angle-double-right" aria-hidden="true"></i></a>
-                                        </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6 col-12">
+                            <div class="our-services-box">
+                                <div class="our-services-items">
+                                    <i class="flaticon-light-bulb"></i>
+                                    <div class="our-services-content">
+                                        <h4><a href="{{ url_for('conversion') }}">图像转换</a></h4>
+                                        <p>借助itk工具将2D与3D医学影像相互转换。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                                        <a href="{{ url_for('conversion') }}">立即试用<i
+                                                class="fa fa-angle-double-right" aria-hidden="true"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -258,44 +257,46 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="bg-sponsors-section">
-            <div class="container">
-                <div class="row">
-                    <div class="sponsors-option">
-                        <!-- <div class=" section-header"> -->
-                        <div class="section-bottom">
-                            <h2>Zichuana</h2>
-                            <p>竞赛项目</p>
-                            <p>使用过程中出现的任何问题可以通过用户反馈反馈给我们，同时欢迎有更好提议的您参与反馈</p>
-                            <p>联系邮箱：2092653757@qq.com</p>
-                        </div>
+    <section class="bg-sponsors-section">
+        <div class="container">
+            <div class="row">
+                <div class="sponsors-option">
+                    <!-- <div class=" section-header"> -->
+                    <div class="section-bottom">
+                        <h2>Zichuana</h2>
+                        <p>竞赛项目</p>
+                        <p>使用过程中出现的任何问题可以通过用户反馈反馈给我们，同时欢迎有更好提议的您参与反馈</p>
+                        <p>联系邮箱：2092653757@qq.com</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Start Scrolling -->
-        <div class="scroll-img"><i class="fa fa-angle-up" aria-hidden="true"></i></div>
-        <!-- End Scrolling -->
+    <!-- Start Scrolling -->
+    <div class="scroll-img"><i class="fa fa-angle-up" aria-hidden="true"></i></div>
+    <!-- End Scrolling -->
 
-    </div>
+</div>
 
-    <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-    <script type="text/javascript" src="js/jquery.waypoints.min.js"></script>
-    <script type="text/javascript" src="js/jquery.counterup.min.js"></script>
-    <script type="text/javascript" src="js/swiper.min.js"></script>
-    <script type="text/javascript" src="js/lightcase.js"></script>
-    <script type="text/javascript" src="js/jquery.nstSlider.js"></script>
-    <script type="text/javascript" src="js/jquery.flexslider.js"></script>
-    <script type="text/javascript" src="js/custom.map.js"></script>
-    <script type="text/javascript" src="js/plugins.isotope.js"></script>
-    <script type="text/javascript" src="js/isotope.pkgd.min.js"></script>
-    <script type="text/javascript" src="js/custom.isotope.js"></script>
-    <script type="text/javascript" src="js/custom.js"></script>
+<script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="js/jquery.waypoints.min.js"></script>
+<script type="text/javascript" src="js/jquery.counterup.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/lightcase.js"></script>
+<script type="text/javascript" src="js/jquery.nstSlider.js"></script>
+<script type="text/javascript" src="js/jquery.flexslider.js"></script>
+<script type="text/javascript" src="js/custom.map.js"></script>
+<script type="text/javascript" src="js/plugins.isotope.js"></script>
+<script type="text/javascript" src="js/isotope.pkgd.min.js"></script>
+<script type="text/javascript" src="js/custom.isotope.js"></script>
+<script type="text/javascript" src="js/custom.js"></script>
+<script src="js/index.js"></script>
 </body>
 
 </html>
