@@ -163,9 +163,9 @@ def userLogInfo():
     lists = []
 
     routers = {'resultCT': 'CT图像类别预测', 'resultXray': 'X光片类别预测',
-                   'focalpoint_res': '标记CT图像COVID-19病灶点', 'heatmap_res': '绘制CT图像热力图',
-                   'segXray_res': '绘制X光片肺部标记图', 'pngtonii_res': 'png堆叠转换nii文件',
-                   'niitopng_res': 'nii文件转化为png格式'}
+               'focalpoint_res': '标记CT图像COVID-19病灶点', 'heatmap_res': '绘制CT图像热力图',
+               'segXray_res': '绘制X光片肺部标记图', 'pngtonii_res': 'png堆叠转换nii文件',
+               'niitopng_res': 'nii文件转化为png格式'}
     try:
         if request.method == 'POST':
             id = current_user.get_id()
@@ -502,6 +502,7 @@ def create():
     db.create_all()
     User.init_db()
 
+
 def saveImage(image):
     """
     保存前端用户上传的图片
@@ -804,7 +805,7 @@ def niitopng_res():
             f.write(nii_file.read())
         f.close()
 
-        img = nib.load('static/data/'+file)
+        img = nib.load('static/data/' + file)
         img_fdata = img.get_fdata()
 
         if not os.path.exists(img_f_path):
